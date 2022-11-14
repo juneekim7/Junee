@@ -1,0 +1,179 @@
+<!--준이가 만듦, 대충 만들어서 별거없음-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>200축</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: ghostwhite;
+        }
+
+        #text {
+            width: fit-content;
+            margin: 0 auto;
+            margin-top: 20vh;
+            margin-bottom: 20vh;
+            text-align: center;
+            color: #1B1A27;
+            line-height: 20vh;
+            font-size: 13vh;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let text;
+        let body;
+        const script = [
+            {
+                text: "오늘은<br/><br/>무슨 날",
+                time: 1000,
+                transition() {
+                    setTimeout(()=> {
+                        document.getElementById("text").innerHTML="오늘은<br/><br/>무슨 날?";
+                    },500);
+                }
+            },
+            {
+                text: "<br/>바로!<br/>",
+                time: 300,
+                transition() {
+                    
+                }
+            },
+            {
+                text: "수<br/>능<br/>날",
+                time: 200,
+                transition() {
+                    body.style.transition="all 200ms linear";
+                    body.style.backgroundColor="#1B1A27";
+                }
+            },
+            {
+                text: "그<br/>리<br/>고",
+                time: 1000,
+                transition() {
+                    text.style.transition="all 300ms linear";
+                    text.style.color="ghostwhite";
+                }
+            },
+            {
+                text: "<br/>맹<br/>",
+                time: 300,
+                transition() {
+
+                }
+            },
+            {
+                text: "<br/>맹이<br/>",
+                time: 300,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/><br/>2",
+                time: 100,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/><br/>20",
+                time: 100,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/><br/>200",
+                time: 100,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/><br/>200기",
+                time: 100,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/><br/>200기념",
+                time: 100,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/>200기념<br/>애",
+                time: 100,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/>200기념<br/>애교!",
+                time: 100,
+                transition() {
+
+                }
+            },
+            {
+                text: "맹이<br/>200기념<br/>애교 날!",
+                time: 1000,
+                transition() {
+
+                }
+            },
+            {
+                text: "앞으로도<br/>오래<br/>방송하고,",
+                time: 1500,
+                transition() {
+
+                }
+            },
+            {
+                text: "즐찾200<br/>축하해<br/>!!!!!!!!",
+                time: 2000,
+                transition() {
+
+                }
+            },
+            {
+                text: "애교<br/>부탁할게<br/>ㅎㅎㅎ",
+                time: 1500,
+                transition() {
+
+                }
+            },
+            {
+                text: "<br/>-준이-<br/>",
+                time: "마지막꺼임ㅇㅇ",
+                transition() {
+
+                }
+            },
+        ]
+        
+        function textChange(num) {
+            text.innerHTML=script[num].text;
+            script[num].transition();
+            if(num+1<script.length) setTimeout(()=>{textChange(num+1)},script[num].time);
+        }
+
+        window.onload=()=> {
+            text=document.getElementById("text");
+            body=document.body;
+            textChange(0);
+        }
+    </script>
+</head>
+<body>
+    <div id="text"></div>
+</body>
+</html>

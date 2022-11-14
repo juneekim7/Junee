@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keyword" content="flemu, rhythm, game, 플레뮤, 리듬게임, 게임">
+    <meta name="description" content="flemu - web rhythm game">
+    <meta name="author" content="Junee(준이)">
+    <title>ƒlemu</title>
+    <!-- css -->
+    <link href="https://fonts.googleapis.com/css2?family=Niconne&family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+    <!-- data -->
+    <script defer src="data/keycodes.js"></script>
+    <script defer src="data/level.js"></script>
+    <script defer src="data/color.js"></script>
+
+    <!-- script -->
+    <script defer src="script/basicfunctions.js"></script>
+    <script defer src="script/start.js"></script>
+    <script defer src="script/levelpreview.js"></script>
+    <script defer src="script/gameplay.js"></script>
+</head>
+<body>
+    <div id="logo" class="page" style="display: block;">
+        <h1>ƒlemu</h1>
+        <h1>ƒlemu</h1>
+    </div>
+    <div id="main" class="page">
+        <div id="level-grid">
+            <!--levels-->
+            <div class="level electronic">
+                <div class="level-difficulty">12</div>
+                <div class="level-emoji">💖🧨</div>
+                <div class="level-name">Karma</div>
+            </div>
+        </div>
+    </div>
+    <div id="level-preview" class="page">
+        <div class="background" style="width: calc(100vw / 9 * 7); left: 0; animation: preview-background 1000ms;"></div>
+    </div>
+    <div id="game" class="page">
+        <div id="decision-line"></div>
+    </div>
+</body>
+</html>

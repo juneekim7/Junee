@@ -1,0 +1,314 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input,
+select,
+button {
+    border: none;
+    outline: none;
+
+    text-align: center;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f08080;
+}
+
+#alert {
+    width: 100vw;
+    height: 20vh;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    text-align: center;
+    font-size: 5vh;
+    line-height: 20vh;
+    color: white;
+
+    z-index: 6974;
+
+    position: fixed;
+    top: calc(50vh - 10vh);
+}
+
+.box {
+    width: 100vw;
+    height: 30vh;
+
+    position: absolute;
+}
+
+#main > .box {
+    top: calc(50vh - 15vh);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.main-input {
+    margin: 1vh 2vh 1vh 2vh;
+    height: 8vh;
+    border-radius: 2px 0 2px 0;
+    border-right: 3px solid dimgrey;
+    border-bottom: 4px solid dimgrey;
+    box-sizing: content-box;
+
+    font-size: 5vh;
+}
+
+#play {
+    margin-left: 25vw;
+    width: 50vw;
+    border-radius: 4vh;
+}
+
+#play:active {
+    border-top: 3px solid dimgrey;
+    border-right: none;
+    border-bottom: none;
+    border-left: 3px solid dimgrey;
+}
+
+#character-select > option {
+    display: none;
+}
+
+#character-display,
+#tutorial-display,
+#score-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    position: absolute;
+
+    display: none;
+}
+
+#character-image {
+    width: 80vw;
+    height: 50vh;
+    background-image: url("./source/image/character/Jack/main.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 5vh;
+    left: 10vw;
+}
+
+#description {
+    width: 80vw;
+
+    text-align: center;
+    font-size: 2vh;
+    color: white;
+
+    position: absolute;
+    top: 55vh;
+    left: 10vw;
+}
+
+.left,
+.right {
+    text-align: center;
+    font-size: 10vh;
+    line-height: 10vh;
+    color: lightgrey;
+
+    position: absolute;
+    top: 25vh;
+}
+
+.left {
+    left: 5vw;
+}
+
+.right {
+    right: 5vw;
+}
+
+#tutorial {
+    width: 100vw;
+
+    text-align: center;
+    text-decoration: underline;
+    font-size: 3vh;
+    color: white;
+
+    position: absolute;
+    bottom: 10px;
+}
+
+#tutorial-image {
+    width: 80vw;
+    height: 90vh;
+    background-image: url("./source/image/tutorial.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 5vh;
+    left: 10vw;
+}
+
+#x {
+    text-align: right;
+    font-size: 5vh;
+    color: lightgrey;
+
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+#game > .box {
+    top: 70vh;
+}
+
+#enemy,
+#player {
+    width: 100vw;
+    height: 35vh;
+
+    display: flex;
+}
+
+.character {
+    width: 60vw;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+@keyframes damage {
+    0% {
+        background-color: tomato;
+    }
+}
+
+@keyframes defend {
+    0% {
+        background-color: lightskyblue;
+    }
+}
+
+.info {
+    width: 40vw;
+    height: 100%;
+
+    text-align: center;
+    font-size: 4vh;
+    font-weight: bold;
+    line-height: 8vh;
+}
+
+.info > div {
+    height: 32vh;
+
+    position: relative;
+    top: calc(35vh / 2 - 16vh);
+}
+
+#score-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+
+    z-index: 1;
+}
+
+#time-and-score {
+    width: 100vw;
+
+    text-align: center;
+    text-shadow: 3px 2px 2px rgba(0, 0, 0, 0.5);
+    font-size: 90px;
+    line-height: 100px;
+    color: white;
+
+    display: none;
+
+    position: absolute;
+    top: calc(35vh - 50px);
+
+    z-index: 2;
+}
+
+#skillpad {
+    display: none;
+}
+
+.skill {
+    margin: 10%;
+    width: 30%;
+    height: 30%;
+    background-color: snow;
+    border: 3px solid black;
+
+    text-align: center;
+    font-size: 6vw;
+
+    position: absolute;
+}
+
+#ultimate {
+    margin: 0;
+    width: 30vw;
+    height: 30vw;
+    background-color: gold;
+    border: 5px solid black;
+
+    font-size: 20vw;
+
+    top: calc(50% - 15vw);
+    left: calc(50% - 15vw);
+
+    transform: rotate(45deg);
+    transform-origin: center;
+}
+
+#ultimate > div {
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+#reload {
+    top: 0;
+    left: 0;
+}
+
+#defend {
+    bottom: 0;
+    left: 0;
+}
+
+#fire {
+    top: 0;
+    right: 0;
+}
+
+#spray {
+    bottom: 0;
+    right: 0;
+}
+
+#result > .box {
+    top: calc(50vh - 45px);
+}
+
+#result-info {
+    width: 100vw;
+
+    text-align: center;
+    text-shadow: 3px 2px 2px rgba(0, 0, 0, 0.5);
+    font-size: 90px;
+    line-height: 100px;
+    color: white;
+}

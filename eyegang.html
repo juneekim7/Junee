@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>눈 보호</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <script>
+        let color=["red","cyan","green","yellow","magenta","white","black","blue"];
+        setInterval(()=> {
+            document.body.style.backgroundColor=color[Math.floor(Math.random()*color.length)];
+        },1);
+    </script>
+</head>
+<body>
+</body>
+</html>

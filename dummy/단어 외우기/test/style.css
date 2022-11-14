@@ -1,0 +1,207 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    width: 40%;
+    height: 15%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+input:disabled {
+    text-align: center;
+}
+
+#bullet {
+    width: calc(300px*1.5);
+    height: calc(150px*1.5);
+    background-image: url("sources/bullet.png");
+    background-size: calc(300px*1.5) calc(150px*1.5);
+    opacity: 1;
+
+    font-size: 1.5em;
+    text-align: center;
+
+    position: absolute;
+    left: 100px;
+    top: 100px;
+
+    animation-name: shot;
+    animation-duration: 2s;
+    z-index: 0;
+}
+
+#basicInfo {
+    margin-top: 5%;
+    margin-left: 110px;
+    opacity: 0;
+}
+
+#hintbox {
+    width: 50%;
+    height: 150px;
+
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    font-size: 1.5em;
+
+    position: absolute;
+    left: 25%;
+    top: 70%;
+}
+
+#HintText {
+    width: 50%;
+    height: 30%;
+    margin-top: 5%;
+    font-size: 120%;
+}
+
+#hint {
+    width: 15%;
+    height: 20%;
+    position: absolute;
+    left: 80%; top: 48%;
+}
+
+#next {
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    left: 85%; top: 70%;
+}
+
+#submit {
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    left: 85%; top: 85%;
+}
+
+#magazine {
+    width: calc(250px*0.7);
+    height: calc(400px*0.7);
+    background-image: url("sources/magazine.png");
+    background-size: calc(250px*0.7) calc(400px*0.7);
+    background-position: 0 50%;
+
+    position: absolute;
+    left: calc(740px + 500px - 200px);
+    top: calc(140px + 150px - 50px);
+
+    animation-duration: 1s;
+    z-index: 0;
+}
+
+#pistol {
+    width: calc(913px*0.7);
+    height: calc(630px*0.7);
+    background-image: url("sources/pistol.png");
+    background-size: calc(913px*0.7) calc(630px*0.7);
+    opacity: 1;
+
+    position: absolute;
+    left: calc(90px + 500px);
+    top: calc(-40px + 150px);
+
+    animation-duration: 1s;
+    z-index: 4;
+}
+
+#slide {
+    width: calc(770px*0.6 + 60px);
+    height: calc(220px*0.6);
+    background-image: url("sources/slide.png");
+    background-size: calc(770px*0.6 + 60px) calc(220px*0.6);
+    opacity: 1;
+
+    position: absolute;
+    left: calc(150px + 500px); top: calc(20px + 150px);
+
+    animation-name: slideReload;
+    animation-duration: 0.2s;
+    z-index: 3;
+}
+
+#slide:after {
+    width: calc(125px*0.7);
+    height: calc(50px*0.7);
+    background-color: rgb(52, 52, 52);
+    border-radius: 20px 20px 0 0;
+
+    position: absolute;
+    left: calc(630px*0.7 - 15px);
+    top: calc(-19px*0.7 - 3px);
+
+    content: "";
+}
+
+#struct1 {
+    width: calc(500px*0.7);
+    height: calc(75px*0.7);
+    background-color: rgb(52, 52, 52);
+    border-radius: 5px;
+    opacity: 1;
+
+    position : absolute;
+    left: calc(110px + 500px + 20px); top: calc(75px + 150px - 20px);
+
+    animation-duration: 1s;
+    z-index: 1;
+}
+
+#struct2 {
+    background-color: transparent;
+    border-left: calc(50px*0.7) solid rgb(52, 52, 52);
+    border-top: calc(50px*0.7) solid rgb(52, 52, 52);
+    border-right: calc(50px*0.7) solid transparent;
+    border-bottom: calc(50px*0.7) solid transparent;
+    opacity: 1;
+
+    position: absolute;
+    left: calc(900px + 500px - 240px);
+    top: calc(80px + 150px - 35px);
+
+    animation-name: triggerReload;
+    animation-duration: 0.2s;
+    transform-origin: 0% 100%;
+    transform: rotate(45deg);
+    z-index: 2;
+}
+
+#white {
+    width : calc(300px*0.7);
+    height: calc(200px*0.7);
+    background-color: white;
+
+    position: absolute;
+    left: calc(700px + 500px - 200px); top: calc(100px + 150px);
+
+    z-index: 1;
+}
+
+@keyframes slideReload {
+    from{left: calc(150px + 500px + 50px);}
+    to{left: calc(150px + 500px);}
+}
+
+@keyframes triggerReload {
+    from{transform: rotate(0deg);}
+    to{transform: rotate(45deg);}
+}
+
+@keyframes shot {
+    from{
+        left: calc(110px + 500px + 20px); top: calc(75px + 150px - 20px + 10px); 
+        width: calc(300px*0.2); height: calc(150px*0.2);
+        background-size: calc(300px*0.2) calc(150px*0.2);
+    }
+    to{
+        left: 100px; top: 100px;
+        width: calc(300px*1.5); height: calc(150px*1.5);
+        background-size:calc(300px*1.5) calc(150px*1.5);
+    }
+}

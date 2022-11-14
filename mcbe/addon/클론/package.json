@@ -1,0 +1,22 @@
+{
+    "name": "클론",
+    "version": "0.0.1",
+    "description": "클론: Minecraft Bedrock Addon",
+    "scripts": {
+      "build": "webpack",
+      "watch": "webpack --info-verbosity verbose -w",
+       "zip": "webpack && mcaddon-start --zip behavior_pack_link \"dist/클론.mcpack\"",
+      
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "webpack": "^4.39.3",
+        "webpack-cli": "^3.3.9",
+        "ts-loader": "^6.0.4",
+        "typescript": "^3.6.2",
+        "minecraft-scripting-types-server": "^1.0.0"
+    }
+}

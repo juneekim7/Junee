@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <title>cloudpad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            touch-action: none;
+            user-select: none;
+        }
+
+        #ready {
+            width: 100vw;
+            height: 100vh;
+            background-color: grey;
+
+            position: absolute;
+            z-index: 1;
+        }
+
+        #music-box {
+            position: fixed;
+        }
+
+        #controller {
+            width: 100vw;
+            height: 100vh;
+
+            display: grid;
+
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-areas: 
+                "scratch scratch scratch snare snare activate1"
+                "playback playback hihat hihat hihat volume"
+                "console console activate2 kick kick volume"
+            ;
+        }
+        
+        .pad {
+            border: 5px solid darkgrey;
+            background-color: cadetblue;
+
+            font-size: 10vh;
+            text-align: center;
+            line-height: 30vh;
+        }
+    </style>
+    <script>
+        const sound = new Object();
+        const musicData = {
+            'echo': {
+                id: 265431534,
+                start: 13400,
+                bpm: 30,
+            }
+        }
+    </script>
+    <script>
+        let music;
+        const musicName = 'echo';
+
+        function ready() {
+            document.getElementById('ready').style.display = 'none';
+            for(let element of document.getElementsByClassName('pad')) {
+                element.style.gridArea = element.id;
+            }
+            setVariables();
+            setMusic();
+            document.getElementById('playback').addEventListener('touchend', playback);
+
+            function setVariables() {
+                const soundName = ['kick', 'hihat', 'snare', 'scratch'];
+                for(let name of soundName) {
+                    sound[name] = new Howl({
+                        src: [`./sound/${name}.wav`]
+                    });
+                    document.getElementById(name).addEventListener('touchstart', (event) => {
+                        sound[name].play();
+                    })
+                }
+            }
+            function setMusic() {
+                document.getElementById('music-box').innerHTML = '<iframe id="music" width="1" height="1" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/'+musicData[musicName].id+'&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false"></iframe>';
+                music = SC.Widget(document.getElementById('music'));
+
+                music.bind(SC.Widget.Events.READY, () => {
+                    music.seekTo(musicData[musicName].start);
+                    music.pause();
+                });
+            }
+        }
+
+        function playback() {
+            music.seekTo(musicData[musicName].start);
+            music.play();
+        }
+</script>
+</head>
+<body>
+    <div id="ready" onclick="ready()">PLAY</div>
+    <div id="music-box"></div>
+    <div id="controller">
+        <div id="scratch" class="pad">SCRATCH</div>
+        <div id="snare" class="pad">SNARE</div>
+        <div id="activate1" class="pad"></div>
+        <div id="playback" class="pad">PLAYBACK</div>
+        <div id="hihat" class="pad">HI-HAT</div>
+        <div id="volume" class="pad"></div>
+        <div id="console" class="pad"></div>
+        <div id="activate2" class="pad"></div>
+        <div id="kick" class="pad">KICK</div>
+    </div>
+</body>
+</html>

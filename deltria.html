@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deltria</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sqrt3 : 1.732050807568877;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            line-height: 30px;
+            color: #601E60;
+        }
+        
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: #FFFFF0;
+            overflow: hidden;
+        }
+
+        .page {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #main {
+            animation: appear 1000ms linear;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #play {
+            width: 100%;
+            height: 100%;
+            transform-origin: 50% 50%;
+            position: absolute;
+        }
+
+        .delta {
+            box-sizing: border-box;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: calc(50px * var(--sqrt3)) solid #F08080;
+            transform-origin: 50% 50%;
+            position: absolute;
+        }
+
+        .up {
+            left: calc(50vw - 50px);
+            top: calc(50vh - 102px);
+        }
+
+        .mirror {
+            width: 150px;
+            height: 10px;
+            background-color: #601E60;
+            position: absolute;
+            left: calc(50vw - 75px);
+            top: calc(50vh - 5px);
+        }
+
+        .down {
+            transform: rotate(180deg);
+            left: calc(50vw - 50px);
+            top: calc(50vh + 102px - calc(50px * var(--sqrt3)));
+        }
+
+        @keyframes mirror {
+            0% {
+                width: 150px;
+                left: calc(50vw - 75px);
+            }
+            100% {
+                width: 100vw;
+                left: 0;
+            }
+        }
+
+        #score {
+            margin: 10px;
+            font-family: 'Nanum Gothic Coding', monospace;
+            position: fixed;
+        }
+
+        #music-box {
+            position: fixed;
+        }
+
+        #music-info {
+            margin: 10px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            background-clip: border-box;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-radius: 20px;
+            font-size: 20px;
+            color: #FFFFF0;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+        }
+
+        #background-up {
+            width: 100vw;
+            height: 50vh;
+            background-color: #F08080;
+            position: absolute;
+        }
+        #background-down {
+            width: 100vw;
+            height: 50vh;
+            background-color: #F08080;
+            position: absolute;
+            bottom: 0;
+        }
+
+        #touch-left {
+            width: 50vw;
+            height: 100vh;
+            position: fixed;
+        }
+        #touch-right {
+            width: 50vw;
+            height: 100vh;
+            position: fixed;
+            right: 0;
+        }
+
+        .note {
+            width: 16px;
+            height: calc(50px * var(--sqrt3));
+            background-color: #601E60;/*#67C8FA;*/;
+            position: absolute;
+            top: calc(50vh - 102px);
+        }
+        ._1 {
+            transform: skew(-30deg, 0);
+            right: calc(50vw + 25px);
+        }
+        ._2 {
+            transform-origin: 100% 100%;
+            transform: rotate(60deg) skew(30deg, 0);
+            right: calc(50vw + 50px);
+        }
+        ._3 {
+            transform-origin: 0% 100%;
+            transform: rotate(-60deg) skew(-30deg, 0);
+            left: calc(50vw + 50px);
+        }
+        ._4 {
+            transform: skew(30deg, 0);
+            left: calc(50vw + 25px);
+        }
+        @keyframes _1 {
+            0% {
+                top: calc(50vh - 102px);
+                right: calc(110vw + 25px);
+            }
+            100% {
+                top: calc(50vh - 102px);
+                right: calc(50vw + 25px);
+            }
+        }
+        @keyframes _2 {
+            0% {
+                top: calc(50vh - 102px - calc(30vw * var(--sqrt3)));
+                right: calc(80vw + 50px);
+            }
+            100% {
+                top: calc(50vh - 102px);
+                right: calc(50vw + 50px);
+            }
+        }
+        @keyframes _3 {
+            0% {
+                top: calc(50vh - 102px - calc(30vw * var(--sqrt3)));
+                left: calc(80vw + 50px);
+            }
+            100% {
+                top: calc(50vh - 102px);
+                left: calc(50vw + 50px);
+            }
+        }
+        @keyframes _4 {
+            0% {
+                top: calc(50vh - 102px);
+                left: calc(110vw + 25px);
+            }
+            100% {
+                top: calc(50vh - 102px);
+                left: calc(50vw + 25px);
+            }
+        }
+        @keyframes note-fade {
+            0% {/*width: current;*/}
+            100% {width: 0;}
+        }
+        @keyframes long-fade {
+            0% {
+                /*width: current;*/
+                opacity: 1;
+            }
+            100% {
+                width: 0;
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes beat-up {
+            20% {transform: scale(1.1);}
+            100% {transform: scale(1);}
+        }
+        @keyframes beat-down {
+            20% {transform: rotate(180deg) scale(1.1);}
+            100% {transform: rotate(180deg) scale(1);}
+        }
+    </style>
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script name="data">
+        const keycodes=["","","","","","","","","","","","","","↵","","","","","","","","","","","","","","esc","","","","","","","","","","←","↑","→","↓","","","","","","","","0","1","2","3","4","5","6","7","8","9","","","","","","","","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",";","=",",","-",".","/","`","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","'"];
+        
+        const game = {
+            index: 0,
+            startTime: -1,
+            score: {
+                value: 0,
+                combo: 0,
+                perfect: 0,
+                good: 0,
+                bad: 0,
+                miss: 0,
+            }
+        }
+
+        const level = [
+            {
+                name: 'coin',
+                artist: 'IU',
+                genre: 'K-pop',
+                difficulty: 0,
+                music: 1089617896,
+                volume: 30,
+                bpm: 127, //실제 bpm이 아닌 한 박자의 ms // 1/16
+                delay: 0,
+                note: {
+                    //s == short, l == long
+                    1: '                                                                      lll       s     s  s        s   lll       s     s  s        s   lll       s     s  s       s   lll                             '.replace(/\|/g,''),
+                    2: '                                                                                      s  s  s                         s  s  s                         s  s s                                         '.replace(/\|/g,''),
+                    3: '                                                                         s                      s        s                      s   s    s                     s        s          s                 '.replace(/\|/g,''),
+                    4: '                                                                                  s           s                   s           s      s            s          s                 s ll  llllllll        '.replace(/\|/g,'')
+                }
+            },
+            {
+                name: 'Bullet Waiting For Me',
+                artist: 'Nikki',
+                genre: 'EDM',
+                difficulty: 0,
+                music: 389258808,
+                volume: 50,
+                bpm: 280, //실제 bpm이 아닌 한 박자의 ms // 1/8
+                delay: 280 * 4,
+                note: {
+                    //s == short, l == long
+                    1: 's       '.replace(/\|/g,''),
+                    2: 's       '.replace(/\|/g,''),
+                    3: '        '.replace(/\|/g,''),
+                    4: '        '.replace(/\|/g,'')
+                }
+            },
+        ];
+    </script>
+</head>
+<body onkeydown="keydown(this)" onkeyup="keyup(this)">
+    <div id="main" class="page" onmouseup="play(0)" touchend="play('random')">
+        <div class="delta up"></div>
+        <div class="mirror"></div>
+        <div class="delta down"></div>
+    </div>
+    <div id="game" class="page">
+        <div id="play">
+            <div id="background-up" style="display: none;"></div>
+            <div id="background-down"></div>
+
+            <div id="music-box"></div>
+            <div id="note-box">
+            </div>
+
+            <div class="delta up"></div>
+            <div class="mirror" style="width: 100vw; left: 0; animation: mirror 1000ms;"></div>
+            <div class="delta down" style="border-bottom: calc(50px * 1.732) solid #FFFFF0;"></div>
+            <div id="touch-left"></div>
+            <div id="touch-right"></div>
+        </div>
+        <div id="score">000000</div>
+        <div id="music-info">artist - title ♪</div>
+    </div>
+    <script name="basic functions">
+        //랜덤
+        function random(n1, n2) {
+            return n1 < n2 ? Math.floor(Math.random() * (n2 - n1)) + n1 : Math.floor(Math.random() * (n1 - n2)) + n2;
+        }
+
+        //시간 가져오기
+        function getTime() {
+            return Date.now();
+        }
+
+        //페이지
+        function page(index) {
+            return typeof(index) == 'number' ? document.getElementsByClassName('page')[index] : document.getElementById(index);
+        }
+
+        //페이지 이동
+        function pageChange(index) {
+            for(let element of document.getElementsByClassName('page')) {
+                element.style.display = 'none';
+            }
+            page(index).style.display = 'block';
+        }
+    </script>
+    <script name="settings">
+        //키세팅
+        let keybinds = typeof(localStorage['keybinds']) == 'object' ? localStorage['keybinds'] : ['esc','d','f','j','k'];
+    </script>
+    <script name="gameplay">
+        //게임 시작
+        function play(index) {
+            if(index == 'random') index = random(0, level.length);
+            game.index = index;
+            pageChange('game');
+
+            //값 불러오기
+            document.getElementById('music-box').innerHTML = '<iframe id="music" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/'+level[index].music+'&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false"></iframe>';
+            let music = SC.Widget(document.getElementById('music'));
+            document.getElementById('score').textContent = '0'.padStart(6, '0');
+            document.getElementById('music-info').textContent = `${level[index].artist} - ${level[index].name} ♪`;
+
+            //music 초기 세팅
+            music.bind(SC.Widget.Events.READY, () => {
+                music.seekTo(level[index].delay);
+                music.pause();
+                music.setVolume(level[index].volume);
+            });
+
+            setTimeout(() => {
+
+                setTimeout(() => {
+                    music.play();
+                    game.startTime = getTime();
+                }, 11 * level[index].bpm);
+
+                playNote(index);
+            }, 3000 - 11 * level[index].bpm);
+        }
+
+        //타입 우선 순위
+        function checkType(type, change) {
+            if(type == 'none') return change;
+            else if(type == 'short' && change != 'none') return change;
+            else if(change == 'long') return change;
+            else return type;
+        }
+
+        //노트 떨어지기
+        function playNote(index) {
+            let noteIndex = 0;
+            let noteInterval = setInterval(() => {
+                let type = 'none';
+                for(let roadIndex = 1; roadIndex <= 4; roadIndex++) {
+                    type = checkType(type, createNote(index, roadIndex, noteIndex));
+                }
+
+                noteIndex++;
+
+                if(noteIndex == level[index].note[1].length) clearInterval(noteInterval); //gg
+            }, level[index].bpm);
+        }
+
+        //note element 생성
+        function createNote(index, roadIndex, noteIndex) {
+            let noteArray = level[index].note[roadIndex];
+            if(noteArray[noteIndex] == ' ') return 'none';
+            else if(noteArray[noteIndex - 1] == 'l' && noteArray[noteIndex] == 'l') return 'long continue';
+
+            //note 생성
+            let note = document.createElement('div');
+            note.setAttribute('class', `note _${roadIndex}`);
+            document.getElementById('note-box').appendChild(note);
+
+            //short 노트일 경우
+            if(noteArray[noteIndex] == 's') {
+                //애니메이션
+                note.style.animation = `_${roadIndex} ${10 * level[index].bpm}ms linear`;
+                setTimeout(() => {
+                    note.style.animation = `note-fade ${0.5 * level[index].bpm}ms linear`;
+                }, 10 * level[index].bpm);
+
+                //miss일 경우 note 삭제
+                let miss = setTimeout(() => {
+                    if(note.parentElement) { //note가 존재한다면 note의 상위 element도 존재한다를 이용함 
+                        note.parentElement.removeChild(note);
+                    }
+                }, 10.5 * level[index].bpm);
+
+                return 'short';
+            }
+            //롱노트일 경우
+            else if(noteArray[noteIndex - 1] != 'l' && noteArray[noteIndex] == 'l') {
+                let longNoteLength = 1;
+                while(noteArray[noteIndex + longNoteLength] == 'l') longNoteLength++;
+                note.style.width = `${6 * longNoteLength}vw`;
+                
+                //애니메이션
+                note.style.animation = `_${roadIndex} ${10 * level[index].bpm}ms linear`;
+                setTimeout(() => {
+                    note.style.animation = `long-fade ${longNoteLength * level[index].bpm}ms linear`;
+                }, 10 * level[index].bpm);
+
+                //long note miss
+                let miss = setTimeout(() => {
+                    if(note.parentElement) { //note가 존재한다면 note의 상위 element도 존재한다를 이용함
+                        note.parentElement.removeChild(note);
+                    }
+                }, (10 + longNoteLength) * level[index].bpm);
+                
+                return 'long';
+            }
+        }
+
+        //정확도 확인 
+        function checkAccuracy(index, roadIndex, checkIndex, time) {
+            let note = level[index].note[roadIndex];
+            let bpm = level[index].bpm;
+            if(note[checkIndex] == ' ') {
+            }
+            else if(note[checkIndex] == 's') {
+                if(time < bpm * 3 /4) {
+                    game.score.perfect++;
+                }
+                else if(time < bpm) {
+                    game.score.good++;
+                }
+            }
+            else if(note[checkIndex] == 'l' && note[checkIndex - 1] == '')
+            document.getElementById('score').textContent = `${game.score.perfect * 500 + game.score.good * 300 + game.score.bad * 100}`.padStart(6, 0);
+        }
+
+        //key 확인
+        function keydown() {
+            let now = getTime();
+            let key = keycodes[event.keyCode];
+            if(page('main').style.display == 'block') keydownMain(key); 
+            else if(page('game').style.display == 'block') keydownGame(key, now);
+        }
+
+        function keydownMain(key) {
+            return 0;
+        }
+
+        function keydownGame(key, now) {
+            if(keybinds.indexOf(key) == -1) return -1;
+            if(game.index != -1 && keybinds.indexOf(key) >= 1 && keybinds.indexOf(key) <= 4) {
+                let index = game.index;
+                let checkIndex = Math.floor((now - game.startTime) / level[index].bpm);
+                let time = (now - game.startTime) - level[index].bpm * checkIndex;
+                checkAccuracy(index, keybinds.indexOf(key), checkIndex, time);
+            }
+        }
+
+        function keyup() {
+            let key = keycodes[event.keyCode];
+            if(keybinds.indexOf(key) == 0) return;
+        }
+    </script>
+    <script name="start">
+        pageChange('main');
+    </script>
+</body>
+</html>

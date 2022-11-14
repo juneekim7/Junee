@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#target {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    background-image: url("https://cdn.pixabay.com/photo/2014/03/25/17/00/target-297821_960_720.png");
+    background-size: 500px 500px;
+
+    z-index: 0;
+}
+
+#hole {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    background-image: url("https://cdn.pixabay.com/photo/2013/07/12/18/09/bullet-hole-153071_960_720.png");
+    background-size: 30px 30px;
+
+    position: relative;
+    top: -250;
+
+    z-index: 1;
+}

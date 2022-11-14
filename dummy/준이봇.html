@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>준이봇</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nanum Gothic', sans-serif;
+            overflow: none;
+        }
+
+        body {
+            background-color: lightcoral;
+        }
+
+        #header {
+            display: flex;
+            width: 100vw;
+            height: 80px;
+            background-color: rgba(0, 0, 0, 0.05);
+            align-items: center;
+            font-size: 20px;
+            line-height: 30px;
+        }
+
+        #content {
+            width: 100vw;
+            height: calc(100vh - calc(80px + 50px));
+            overflow-y: scroll;
+        }
+
+        .text {
+            margin: 5px 10px 5px 10px;
+            padding: 7px;
+            width: max-content;
+            height: max-content;
+            font-size: 20px;
+            clear: both;
+            white-space: pre-line;
+        }
+
+        .bot {
+            background-color: white;
+            border-radius: 0 6px 6px 6px;
+            float: left;
+        }
+
+        .user {
+            background-color: gold;
+            border-radius: 6px 0 6px 6px;
+            float: right;
+        }
+
+        #send {
+            display: flex;
+            width: 100vw;
+            height: 50px;
+            background-color: white;
+            line-height: 50px;
+            position: fixed;
+            bottom: 0;
+        }
+
+        #send-input {
+            margin-left: 10px;
+            width: calc(100% - 50px);
+            border: none;
+            outline: none;
+            font-size: 25px;
+        }
+
+        #send-button {
+            display: inline-block;
+            color: darkslateblue;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div>
+            <div style="font-weight: 700;">&nbsp;&nbsp;준이봇</div>
+            <div style="font-size: 17px;">&nbsp;&nbsp;💜999+ | ✔</div>
+        </div>
+    </div>
+    <div id="content"></div>
+    <div id="send">
+        <input id="send-input" onkeydown="replyCheck()"/>
+        <div id="send-button" onclick="replyUser()">↵</div>
+    </div>
+    <script>
+        const command = {
+            "준이봇": {
+                reply() {
+                    text("ㅎ2");
+                    text("명령어는 '도움말'이라고 치셈");
+                }
+            },
+            "도움말": {
+                reply() {
+                    let HELP = `🍇기능들🍇
+
+*실제로 ()는 입력하지 않고,
+띄어쓰기가 있어야 해요!
+
+준이봇 소개
+준이봇 사용
+개잘자 소개
+`;
+                    text(HELP);
+                }
+            },
+            "준이봇 소개": {
+                reply() {
+                    let string = `💙준이봇 소개💙
+
+준이봇은 준이가 만든 카카오톡에서
+사람들이 더욱 즐거운
+톡을 할 수 있도록 만들어진
+로봇입니다. 2020년 2월 26일부터
+서비스를 시작했습니다.
+`;
+                    text(string);
+                }
+            },
+            "준이봇 사용": {
+                reply() {
+                    let string = `✅준이봇 사용법✅
+
+준이봇은 카카오톡 아이디
+'jbot'으로 친추할 수 있으며,
+준이봇 테스트 옾챗
+( )에서
+테스트할 수 있습니다.
+`;
+                    text(string);
+                }
+            },
+            "개발자 소개": {
+                reply() {
+                    let string = `💜개발자 소개💜
+
+개발자 준이의 정보는
+http://www.juneekim7.kro.kr 에서
+볼 수 있습니다.
+`;
+                    text(string);
+                }
+            }
+        }
+
+        function text(msg = "", sender = "bot") {
+            if(msg == "") return;
+            let element = document.createElement("div");
+            element.setAttribute("class", `text ${sender}`);
+            element.textContent = msg;
+            document.getElementById("content").appendChild(element);
+            document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
+        }
+
+        function replyCheck() {
+            let msg = document.getElementById("send-input").value;
+            if(event.keyCode == "13" && msg.replace(/ /g, "") != "") replyUser();
+        }
+
+        function replyUser() {
+            let msg = document.getElementById("send-input").value;
+            document.getElementById("send-input").value = "";
+            text(msg, "user");
+            if(command.hasOwnProperty(msg) == true) command[msg].reply();
+        }
+    </script>
+    <script>
+        text("ㅎ2");
+        text("명령어는 '도움말'이라고 치셈");
+        document.getElementById("send-input").focus();
+    </script>
+</body>
+</html>

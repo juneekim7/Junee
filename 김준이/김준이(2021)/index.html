@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" subject="width=device-width, initial-scale=1.0">
+    <title>김준이</title>
+    <style>
+        @font-face {
+            font-family: 'nexon';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "nexon";
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #424874;
+        }
+
+        a{
+            color: #a6b1e1;
+        }
+        a:hover {
+            font-weight: bold;
+        }
+
+        .content {
+            width: 100vw;
+            height: 90vh;
+            overflow-y: auto;
+        }
+        .content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: rgba(90, 90, 90, 0.6);
+        }
+
+        .close {
+            width: 10vh;
+            height: 10vh;
+            color: lightgrey;
+            font-size: 5vh;
+            text-align: center;
+            line-height: 10vh;
+            cursor: pointer;
+            position: fixed;
+            top: 0; right: 0;
+        }
+        .close:hover {
+            color: lightcoral;
+        }
+
+        .paragraph {
+            padding-top: 10vh;
+            padding-bottom: 10vh;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #a6b1e1;
+            text-align: center;
+        }
+
+        .detail {
+            font-size: 30px;
+            line-height: 55px;
+            color: black;
+            text-align: center;
+        }
+
+        .footer {
+            height: 20vh;
+        }
+
+        .subject {
+            width: 80vw;
+            height: 10vh;
+            font-size: 4vh;
+            line-height: 10vh;
+            color: #424874;
+            cursor: pointer;
+            position: fixed;
+            left: 10vw;
+            transition: all 150ms ease;
+            z-index: 10;
+        }
+        @media(hover: hover) {
+            .subject:hover {
+                background-color: ghostwhite !important;
+                font-size: 5vh !important;
+                color: #a6b1e1 !important;
+            }
+        }
+
+        #home {
+            background-color: #f4eeff;
+            top: 35vh;
+        }
+
+        #info {
+            background-color: #dcd6f7;
+            top: 45vh;
+        }
+
+        #sns {
+            background-color: #a6b1e1;
+            top: 55vh;
+        }
+
+        @keyframes page-on {
+            0%{z-index: 20;}
+            100%{width: 100vw; height: 100vh; top: 0; left: 0; z-index: 20;}
+        }
+
+        @keyframes page-down-0 {
+            0%{z-index: 20;}
+            100%{
+                width: 80vw;
+                height: 10vh;
+                background-color: #f4eeff;
+                font-size: 4vh;
+                color: #424874;
+                top: 35vh;
+                left: 10vw;
+                z-index: 20;
+            }
+        }
+        @keyframes page-down-1 {
+            0%{z-index: 20;}
+            100%{
+                width: 80vw;
+                height: 10vh;
+                background-color: #dcd6f7;
+                font-size: 4vh;
+                color: #424874;
+                top: 45vh;
+                left: 10vw;
+                z-index: 20;
+            }
+        }
+        @keyframes page-down-2 {
+            0%{z-index: 20;}
+            100%{
+                width: 80vw;
+                height: 10vh;
+                background-color: #a6b1e1;
+                font-size: 4vh;
+                color: #424874;
+                top: 55vh;
+                left: 10vw;
+                z-index: 20;
+            }
+        }
+    </style>
+    <script>
+        const subject=[
+            {
+                style: {
+                    top: "35vh",
+                    backgroundColor: "#f4eeff"
+                }
+            },
+            {
+                style: {
+                    top: "45vh",
+                    backgroundColor: "#dcd6f7"
+                }
+            },
+            {
+                style: {
+                    top: "55vh",
+                    backgroundColor: "#a6b1e1"
+                }
+            }
+        ];
+
+        let pageNow = -1;
+        let anime = -1;
+
+        function pageSwitch(num) {
+            if(anime != -1) return;
+            if(num != -1) event.stopPropagation();
+            if(pageNow == -1 && num > -1) pageOn(num);
+            else if(pageNow > -1) pageDown(pageNow);
+            else if(num == -1) {
+                for(let i = 0; i < document.getElementsByClassName("subject").length; i++) {
+                    let element = document.getElementsByClassName("subject")[i];
+                    element.style.backgroundColor = subject[i].style.backgroundColor;
+                    element.style.fontSize = "4vh";
+                    element.style.color = "#424874";
+                }
+            }
+        }
+
+        function pageOn(num) {
+            pageNow = num;
+            let page = document.getElementsByClassName("subject")[num];
+            page.style.backgroundColor = "ghostwhite";
+            page.style.fontSize = "5vh";
+            page.style.color = "#a6b1e1";
+            page.style.animation = "page-on 1500ms ease";
+            anime = 0;
+            setTimeout(() => {
+                anime = -1;
+                page.style.animation = "none";
+                page.style.width = "100vw";
+                page.style.height = "100vh";
+                page.style.top = "0";
+                page.style.left = "0";
+                page.style.cursor = "default";
+                page.style.zIndex = "20";
+                document.getElementsByClassName("content")[num].style.display = "block";
+            }, 1300);
+        }
+
+        function pageDown(num) {
+            let page = document.getElementsByClassName("subject")[num];
+            page.style.animation = "page-down-"+num+" 1500ms ease";
+            document.getElementsByClassName("content")[num].style.display = "none";
+            anime = 1;
+            setTimeout(() => {
+                pageNow = -1;
+                anime = -1;
+                page.style.animation = "none";
+                page.style.width = "80vw";
+                page.style.height = "10vh";
+                page.style.top = subject[num].style.top;
+                page.style.left = "10vw";
+                page.style.cursor = "pointer";
+                page.style.zIndex = "10";
+                pageSwitch(-1);
+            }, 1400);
+        }
+
+        function preventClose() {
+            if(document.getSelection() != false) {
+                event.stopPropagation();
+            }
+        }
+    </script>
+</head>
+<body onclick="pageSwitch(-1)">
+    <div class="subject" id="home" onclick="pageSwitch(0)"><span style="margin-left: 3vh;">home</span>
+        <div class="content" style="display: none;" onclick="preventClose()">
+            <div class="close" onclick="pageSwitch(0)">X</div>
+            <div class="paragraph">
+                <h1>ㅎ2</h1>
+                <div class="detail">
+                    안녕하세요.<br/>
+                    제 홈페이지에 오신 것을 환영합니다.<br/>
+                    여기에는 저에 대한 TMI 가 무척 많이 있으며,<br/>
+                    화려한 저의 경력들도 있습니다.<br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>기본 프로필</h1>
+                <div class="detail">
+                    제 이름은 김준이 이며, 07년생 남자입니다.<br/>
+                    서울에 거주하고 있고, 이성애자입니다.<br/>
+                    생일은 2월 17일입니다.<br/>
+                </div>
+            </div>
+            <div class="footer"></div>
+        </div>
+    </div>
+    <div class="subject" id="info" onclick="pageSwitch(1)"><span style="margin-left: 3vh;">info</span>
+        <div class="content" style="display: none;" onclick="preventClose()">
+            <div class="close">X</div>
+            <div class="paragraph">
+                <h1>외형</h1>
+                <div class="detail">
+                    키는 160cm에 몸무게는 40kg으로,<br/>
+                    작고 매우 말랐습니다.<br/>
+                    둥근 안경을 끼고 있으며,<br/>
+                    여드름에 고생을 받고 있습니다.<br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>성격</h1>
+                <div class="detail">
+                    MBTI 는 INTP이고 혈액형은 A형.<br/>
+                    소심한 성격이지만,<br/>
+                    친해지면 잘 지냅니다.<br/>
+                    누군가에게 피해를 주는 것을 가장 싫어하며,<br/>
+                    개방적인 성격입니다.<br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>좋아하는 것</h1>
+                <div class="detail">
+                    장래희망은 개발자이고, js를 좋아합니다.<br/>
+                    또, 기리보이, zutomayo(ACAね), 아이유를 좋아합니다.<br/>
+                    좋아하는 애니는 청춘돼지와 코노스바, <s>(ㄴㄷㅆ)</s><br/>
+                    좋아하는 영화는 '너의 이름은'과 '줄무늬 파자마를 입은 소년'입니다.<br/>
+                    좋아하는 악기는 통기타와 베이스입니다.<br/>
+                    음악은 FLO에서 듣습니다.<br/>
+                    음악은 클래식과 발라드 빼고 다 듣습니다.<br/>
+                    가장 좋아하는 음악은 달의하루 - 염라 입니다.<br/>
+                    가장 좋아하는 앨범은 기리보이 - 치명적인 앨범 3 입니다.<br/>
+                    fps 게임을 좋아하는데 팬텀포스, 발로란트,<br/>
+                    포트나이트, 모바일 배그 등을 합니다.<br/>
+                    리듬게임도 좋아해서 사이터스, osu! 등을 합니다.<br/>
+                    롤 주캐는 아리이고 발로란트 주캐는 세이지 입니다.<br/>
+                    좋아하는 색은 흰색입니다.<br/>
+                    가장 좋아하는 음식은 양념돼지갈비이며,<br/>
+                    치킨은 교촌치킨을 좋아합니다. <s>(교촌 사랑해)</s><br/>
+                    계란은 약간 덜 익은 반숙을 좋아합니다.<br/>
+                    민초는 불호파고, 파인애플 피자는 별 신경 안씁니다.<br/>
+                    가장 좋아하는 과목은 정보와 과학입니다.<br/>
+                    책 중에서는 로맨스 소설을 좋아합니다.<br/>
+                    특히 너의 췌장을 먹고 싶어를 좋아합니다.<br/>
+                    드림카는 포르쉐 타이칸입니다.<br/>
+                    뜬금없지만 도시의 가로등 사진 찍는 것도 좋아합니다.<br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>장비</h1>
+                <div class="detail">
+                    핸드폰은 삼성 갤럭시 S21을 사용하고,<br/>
+                    노트북은 삼성 갤럭시 북 flex2을 사용합니다.<br/>
+                    마우스는 로지텍의 g304를 쓰고,<br/>
+                    키보드는 앤프로2 체리적축을 사용합니다.<br/>
+                    통기타는 콜트의 L100C를 사용하고,<br/>
+                    베이스기타는 스콰이어의<br/>
+                    classic vibe 70s jazz bass mn nat을 사용합니다.<br/>
+                    앰프는 펜더의 럼블25를 사용합니다.<br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>그 외 TMI</h1>
+                <div class="detail">
+                    영어 이름은 Junee 입니다.<br/>
+                    대부분의 아이디를 juneekim7로 사용합니다.<br/>
+                    그러나 로블록스 아이디는 JUNEEKIM입니다.<br/>
+                    종교는 없습니다.<br/>
+                    서초동에 거주중입니다.<br/>
+                    원래 ENTP였는데 코로나 이후로 INTP로 바뀌었습니다.<br/>
+                    코로나 때문에 씹덕의 세계에 빠져들게 되었습니다.<br/>
+                    음치지만 노래방 가는 것을 좋아합니다.<br/>
+                    스스로 똑똑하다고 생각합니다.<br/>
+                    "내가 (설마) ~하겠냐" 라고 하면 부정같지만 사실 긍정의 의미입니다.<br/>
+                    밤엔 자기 싫어하고 아침엔 자고 싶어합니다.<br/>
+                    그러나 공부하라고 하면 갑자기 졸립니다.<br/>
+                    어릴 때 부터 좋아했던 것을 말한다면,<br/>
+                    차 - 레고 - 마술 - 보드 - 펜비트 - 통기타 - bmx - 베이스 입니다.<br/>
+                    어떤 상황이 닥쳤을 때 딱히 공감할 사람이 없다면,<br/>
+                    세상 어딘가에 나와 비슷한 상황일 사람을 상상하며<br/>
+                    "우리 왤케 힘드냐 ㅋㅋ", "와 기분 지리네" 같은 말을 합니다.<br/>
+                    다른 사람 앞에서 울지 않습니다.<br/>
+                    가끔씩 너무 외로울 때가 있습니다. <s>(나도 여친..ㅠ)</s><br/>
+                    가끔씩 죽는게 너무 무서울 때가 <s>있습니다.</s>있었습니다.<br/>
+                    그러나 현재는 죽음이 딱히 무섭지 않습니다.<br/>
+                    f12를 눌러 그 외 TMI 외 TMI를 볼 수 있습니다.<br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>프로젝트</h1>
+                <div class="detail">
+                    김준이 홈페이지(2021): <a href="http://www.juneekim7.kro.kr" target="_blank">www.juneekim7.kro.kr</a><br/>
+                    김준이 홈페이지(2020): <a href="http://2020.juneekim7.kro.kr" target="_blank">2020.juneekim7.kro.kr</a><br/>
+                    김준이 홈페이지(2019): <a href="http://2019.juneekim7.kro.kr" target="_blank">2019.juneekim7.kro.kr</a><br/>
+                    김준이 홈페이지(2018): <a href="http://2018.juneekim7.kro.kr" target="_blank">2018.juneekim7.kro.kr</a><br/>
+                    클라비스 (2020): <a href="http://www.clavis.kro.kr" target="_blank">www.clavis.kro.kr</a><br/>
+                    눈 보호(들어가지 마세요.) (2020): <a href="http://protect.eyes.kro.kr" target="_blank">protect.eyes.kro.kr</a><br/>
+                    권총 시물레이션(2019): <a href="http://pistol.jkgun.kro.kr" target="_blank">pistol.jkgun.kro.kr</a><br/>
+                    준이봇 (2020): <a href="https://open.kakao.com/me/juneebot7" target="_blank">준이봇 바로가기</a><br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>수상경력 및 영재원</h1>
+                <div class="detail">
+                    제 36회 한국정보올림피아드 1차 대회 지역부문 장려상<br/>
+                    제 36회 한국정보올림피아드 1차 대회 전국부문 동상<br/>
+                    제 36회 한국정보올림피아드 2차 대회 장려상<br/>
+                    제 52회 과학의 날 과학기술정보통신부 장관상<br/><br/>
+
+                    2018년 서울교육대학교과학영재원 융합1반<br/>
+                    2019년 서울교육대학교과학영재원 사사 정보<br/>
+                    2020년 한양대영재원 심화반<br/>
+                    2021년 서울대학교 사사 정보과학 영재원<br/>
+                </div>
+            </div>
+            <div class="footer"></div>
+        </div>
+    </div>
+    <div class="subject" id="sns" onclick="pageSwitch(2)"><span style="margin-left: 3vh;">sns</span>
+        <div class="content" style="display: none;" onclick="preventClose()">
+            <div class="close" onclick="pageSwitch(2)">X</div>
+            <div class="paragraph">
+                <h1>연락용</h1>
+                <div class="detail">
+                    카카오톡: <a href="https://open.kakao.com/me/juneekim7" target="_blank">juneekim7</a><br/>
+                    디스코드: 준이#0414<br/>
+                    이메일: juneekim7@gmail.com<br/>
+                    세컨 폰: 010-4893-4226<br/>
+                    라인: juneekim7<br/>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>SNS</h1>
+                <div class="detail">
+                    인스타그램: <a href="https://www.instagram.com/juneekim7/" target="_blank">juneekim7</a><br/>
+                    페이스북: <a href="https://www.facebook.com/profile.php?id=100047797260159" target="_blank">juneekim7</a><br/>
+                    젠리: <a href="https://zen.ly/juneekim7" target="_blank">juneekim7</a><br/>
+                    유튜브: <a href="https://www.youtube.com/channel/UCpCGz2NJHwGUkYzbrYLKmbw" target="_blank">준이</a><br/>
+                    사운드 클라우드: <a href="https://soundcloud.com/juneekim7" target="_blank">juneekim7</a><br/>
+                    깃허브: <a href="https://github.com/juneekim7" target="_blank">juneekim7</a> (작업물 별로 안 올림)</br>
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>게임</h1>
+                <div class="detail">
+                    롤: 귀여운 준이<br/>
+                    발로란트: 귀여운 준이<br/>
+                    포트나이트: 귀여운 준이<br/>
+                    레인보우 식스: juneekim7<br/>
+                    로블록스: JUNEEKIM<br/>
+                    배틀넷: 준이#31959<br/>
+                    스팀배그: juneekim7<br/>
+                    모바일배그: 준이ऌ<br/>
+                    크런커: jk77<br/>
+                    서비비오: jk77<br/> 
+                </div>
+            </div>
+            <div class="paragraph">
+                <h1>기타</h1>
+                <div class="detail">
+                    나기지: 준이<br/>
+                    엠티: 귀여운준이<br/>
+                    라프텔: juneekim7@gmail.com<br/>
+                    우리은행: 1002559046993<br/>
+                    카카오뱅크: 7777020734464<br/>
+                </div>
+            </div>
+            <div class="footer"></div>
+        </div>
+    </div>
+</body>
+</html>

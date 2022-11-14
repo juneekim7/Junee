@@ -1,0 +1,22 @@
+{
+    "format_version": 1,
+    "header": {
+        "name": "클론",
+        "description": "준이가 만든 클론 애드온",
+        "uuid": "996d9012-f859-4587-9ef1-a37063113388",
+        "version": [0, 0, 1]
+    },
+
+    "modules": [
+        {
+            "type": "data",
+            "description": "클론 Data",
+            "uuid": "e6f9c7d0-a83e-4d1c-8bb7-c5898f268ba6",
+            "version": [0, 0, 1]
+        }
+    ],
+	"metadata": {
+		"authors": ["author"],
+		"url": "about:blank"
+	}
+}

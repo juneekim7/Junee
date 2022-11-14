@@ -1,0 +1,208 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="keywords" content="김준이, 준이">
+        <meta name="description" content="안녕하세요! 준이의 홈페이지입니다!">
+        <style>
+            body {
+                background: ghostwhite;
+                margin: 0;
+                padding: 0;
+            }
+
+            a {
+                text-decoration-line: none;
+                color: lightsteelblue;
+                font-size: 60%;
+            }
+
+            a:hover {
+                font-size: 75%;
+            }
+
+            #nav {
+                background: whitesmoke;
+                width: 100%;
+                font-family: "Sunflower",sans-serif;
+                padding-top: 1%;
+                border-bottom: 3px solid gainsboro;
+            }
+
+            @media screen and (min-width: 10px) and (max-width: 1000px) {
+                #nav {
+                    height: 5.3%;
+                }
+            }
+
+            @media screen and (min-width: 1000px) {
+                #nav {
+                    height: 12%;
+                }
+            }
+
+            .link {
+                background: transparent;
+                width: 25%;
+                height: 100%;
+                margin-right: -4px;
+                text-align: center;
+                color: lightseagreen;
+                font-size: 300%;
+                font-family: "Sunflower",sans-serif;
+                display: inline-block;
+            }
+
+            .outer {
+                display: table;
+                width: 100%;
+                height: 100%;
+            }
+            
+            .inner {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            #contents {
+                background: snow;
+                border: 2px solid lightseagreen;
+                box-sizing: border-box;
+                width: 100%;
+                line-height: 100%;
+                font-family: "Sunflower",sans-serif;
+            }
+
+            #profile {
+                background: transparent;
+                width: 100%;
+                margin-top: 20%;
+                overflow: hidden;
+            }
+
+            #face {
+                background: transparent;
+                background-image: url("https://i.imgur.com/IVfUpAR.jpg");
+                background-size: 100%;
+                background-repeat: no-repeat;
+                width: 50%;
+                padding-bottom: 50%;
+                margin-right: -4px;
+                display: inline-block;
+            }
+
+            #prodis {
+                background: transparent;
+                width: 50%;
+                height: 0;
+                padding-bottom: 50%;
+                line-height: 50%;
+                text-align: center;
+                font-size: 200%;
+                vertical-align: 500%;
+                display: inline-block;
+            }
+
+            .intro {
+                background: transparent;
+                width: 100%;
+                height: 0;
+                padding-bottom: 75%;
+                line-height: 150%;
+                text-indent: 1%;
+                vertical-align: middle;
+                display: inline-block;
+            }
+
+            @media screen and (min-width: 10px) and (max-width: 1000px) {
+                .intro {
+                    font-size: 260%;
+                }
+            }
+
+            @media screen and (min-width: 1000px) {
+                .intro {
+                    font-size: 200%;
+                }
+            }
+
+            #mobile {
+                width: 100%;
+                height: 30%;
+            }
+
+            @media screen and (min-width: 1000px) {
+                #linkbox {
+                    background: transparent;
+                    width: 70%;
+                    height: 100%;
+                    margin: 0 auto;
+                }
+                #box {
+                    width: 70%;
+                    background: transparent;
+                    margin: 0 auto;
+                }
+                #contents {
+                    margin-top: 70px;
+                    margin-bottom: 70px;
+                }
+                #profile {
+                    margin: 0;
+                    padding-top: 0;
+                }
+                #mobile {
+                    width: 0;
+                    height: 0;
+                }
+            }
+        </style>
+        <script>
+            function changeAge() {
+                var age=document.getElementById("age");
+                var aa=new Date();
+                var year=aa.getFullYear();
+                age.textContent=(JSON.stringify(year-2007+1));
+
+                var nowYear=document.getElementById("ageYear");
+                nowYear.textContent=(year);
+            }
+            window.onload=function() {
+                changeAge();
+            }
+        </script>
+        <title>김준이</title>
+    </head>
+    <body>
+        <div id="nav">
+            <div id="linkbox">
+                <div class="link">HOME</div>
+                <div class="link"><a href="http://intro.jk77.kro.kr">개인정보</a></div>
+                <div class="link"><a href="http://sns.jk77.kro.kr">sns</a></div>
+                <div class="link"><a href="http://gallery.jk77.kro.kr">갤러리</a></div>
+            </div>
+        </div>
+        <div id="box">
+            <div id="contents">
+                <div id="profile">
+                    <div id="face"></div>
+                    <div id="prodis">
+                            이름: 김준이<p>나이: <span id="age">14</span>세<p>성별: 남자<p>(<span id="ageYear">2020</span>년 기준)
+                    </div>
+                </div>
+                <div class="intro">
+                    <div class="outer">
+                        <div class="inner">
+                            <br/><br/><br/><br/>안녕하세요!<br/>제 홈페이지에 오신것을 환영합니다!<br/>
+                            제 홈페이지는 저를 소개하고 있습니다.<br/>
+                            홈페이지를 보고 저에 대해 더 잘 알아주시기를 바랍니다! <br/>
+                            좋은 하루 되세요~^^
+                        </div>
+                    </div>
+                </div>
+                <div id="mobile"></div>
+            </div>
+        </div>
+    </body>
+</html>

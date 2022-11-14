@@ -1,0 +1,153 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
+        <meta charset="utf-8">
+        <style>
+            body {
+                background: ghostwhite;
+                margin: 0;
+                padding: 0;
+            }
+
+            a {
+                text-decoration-line: none;
+                color: lightsteelblue;
+                font-size: 60%;
+            }
+
+            a:hover {
+                font-size: 75%;
+            }
+
+            #nav {
+                background: whitesmoke;
+                width: 100%;
+                font-family: "Sunflower",sans-serif;
+                padding-top: 1%;
+                border-bottom: 3px solid gainsboro;
+            }
+
+            @media screen and (min-width: 10px) and (max-width: 1000px) {
+                #nav {
+                    height: 5.3%;
+                }
+            }
+
+            @media screen and (min-width: 1000px) {
+                #nav {
+                    height: 12%;
+                }
+            }
+
+            .link {
+                background: transparent;
+                width: 25%;
+                height: 100%;
+                margin-right: -4px;
+                text-align: center;
+                color: lightseagreen;
+                font-size: 300%;
+                font-family: "Sunflower",sans-serif;
+                display: inline-block;
+            }
+
+            .outer {
+                display: table;
+                width: 100%;
+                height: 100%;
+            }
+            
+            .inner {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            #contents {
+                background: snow;
+                border: 2px solid lightseagreen;
+                box-sizing: border-box;
+                width: 100%;
+                line-height: 100%;
+                font-family: "Sunflower",sans-serif;
+            }
+
+            .intro {
+                background: transparent;
+                width: 100%;
+                height: 0;
+                padding-bottom: 75%;
+                line-height: 150%;
+                text-indent: 1%;
+                vertical-align: middle;
+                display: inline-block;
+            }
+
+            @media screen and (min-width: 10px) and (max-width: 1000px) {
+                .intro {
+                    font-size: 260%;
+                }
+            }
+
+            @media screen and (min-width: 1000px) {
+                .intro {
+                    font-size: 200%;
+                }
+            }
+
+            #mobile {
+                width: 100%;
+                height: 65%;
+            }
+
+            @media screen and (min-width: 1000px) {
+                #linkbox {
+                    background: transparent;
+                    width: 70%;
+                    height: 100%;
+                    margin: 0 auto;
+                }
+                #box {
+                    width: 70%;
+                    background: transparent;
+                    margin: 0 auto;
+                }
+                #contents {
+                    margin-top: 70px;
+                    margin-bottom: 70px;
+                }
+                #mobile {
+                    width: 0;
+                    height: 0;
+                }
+            }
+        </style>
+        <script>
+            
+        </script>
+        <title>김준이</title>
+    </head>
+    <body>
+        <div id="nav">
+            <div id="linkbox">
+                <div class="link"><a href="http://www.jk77.kro.kr">HOME</a></div>
+                <div class="link"><a href="http://intro.jk77.kro.kr">개인정보</a></div>
+                <div class="link"><a href="http://sns.jk77.kro.kr">sns</a></div>
+                <div class="link">갤러리</div>
+            </div>
+        </div>
+        <div id="box">
+            <div id="contents">
+                <div class="intro">
+                    <div class="outer">
+                        <div class="inner">
+                            <br/><h1>Comming Soon</h1><br/>
+                            곧 만들어집니다.
+                        </div>
+                    </div>
+                </div>
+                <div id="mobile"></div>
+            </div>
+        </div>
+    </body>
+</html>

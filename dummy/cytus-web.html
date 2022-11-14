@@ -1,0 +1,169 @@
+<html>
+    <meta charset="utf-8">
+    <head>
+        <title>cytus-web</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200&display=swap');
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: #2b2e4a;
+                font-family: 'Dosis', sans-serif;
+            }
+
+            #start-title {
+                padding-top: 30vh;
+                font-size: 30vh;
+                text-align: center;
+                text-shadow: 1px 1px 5px black;
+                color: white;
+
+                animation: o 3500ms ease;
+            }
+            #start-subtitle {
+                font-size: 5vh;
+                text-align: center;
+                color: white;
+
+                animation: o 3500ms ease;
+            }
+            @keyframes o {
+                from{opacity: 0;}
+                to{opacity: 1;}
+            }
+
+            #bs {
+                width: 100vw;
+                height: 0.5px;
+                background-color: grey;
+                box-sizing: border-box;
+                position: fixed;
+                top: 15vh;
+            }
+            #be {
+                width: 100vw;
+                height: 1px;
+                background-color: grey;
+                box-sizing: border-box;
+                position: fixed;
+                top: 85vh;
+            }
+            #bar {
+                width: 100vw;
+                height: 1px;
+                background-color: white;
+                position: absolute;
+                top: 50vh;
+
+                animation: o 5000ms ease;
+            }
+
+            /*버튼 style*/
+            .click {
+                width: 60px;
+                height: 60px;
+                background-color: #0d7377;
+                box-sizing: border-box;
+                border-radius: 30px;
+                position: fixed;
+            }
+            .click::before {
+                width: 30px;
+                height: 30px;
+                background-color: #00adb5;
+                box-sizing: border-box;
+                border-radius: 15px;
+                position: absolute;
+                top: 15; left: 15;
+                content: "";
+            }
+        </style>
+        <script>
+            function startGame() {
+                startSettings();
+                gameStart();
+                buttonStart();
+            }
+
+            function startSettings() {
+                document.body.style.opacity="0.8";
+                document.body.onclick="";
+                document.body.innerHTML="<div id='bs'></div><div id='be'></div><div id='bar'></div><div id='button-box'></div>";
+            }
+
+
+            let b=(window.innerHeight)/2;
+            let dir=-1;
+            const bs=(window.innerHeight)/100*15;
+            const be=bs+(window.innerHeight)/100*70;
+            function gameStart() {
+                b=(window.innerHeight)/2;
+                dir=-1;
+                let barMove=setInterval(function() {
+                    document.getElementById("bar").style.top=b;
+                    if(b<=bs||b>=be) {
+                        dir*=-1;
+                    }
+                    b+=dir;
+                },1);
+            }
+
+            function pressCheck(i) {
+                if(Math.abs((window.innerHeight)/2+(window.innerHeight/140*by[i])-b)<=50&&by[i]!=-1) {
+                    document.getElementById("bttn"+i).innerHTML="<font size='10px' color='gold'>perfect!</font>";
+                    by[i]=1;
+                }
+            }
+
+            let btype=["click","click","click"];
+            let btime=[3000, 500, 400];
+            let bx=[-25,0,25];
+            let by=[0,0,0];
+
+            function missCheck(i,nt) {
+                setTimeout(function() {
+                    if(by[i]==0) {
+                        by[i]=-1;
+                        document.getElementById("bttn"+i).innerHTML="<font size='10px' color='red'>miss</font>";
+                        setTimeout(function() {
+                            document.getElementById("bttn"+i).style.display="none";
+                        },500);
+                    }
+                    else document.getElementById("bttn"+i).style.display="none";
+                },1500);
+            }
+
+            function buttonStart() {
+                let i=0;
+                let t=0;
+                let ttt=btime[0];
+                let button=setInterval(function() {
+                    t++;
+                    if(t==ttt-1500) {
+                        document.getElementById("button-box").innerHTML+="<div class='"+btype[i]+"' id='bttn"+i+"' onclick='pressCheck("+i+");'></div>";
+                        document.getElementById("bttn"+i).style.top=(window.innerHeight)/2+(window.innerHeight/140*by[i])-30;
+                        document.getElementById("bttn"+i).style.left=(window.innerWidth)/2+(window.innerWidth/100*bx[i])-30 /*추후에 크기에 따라 변경*/;
+                        document.getElementById("bttn"+i).style.animation="o 1500ms linear";
+                        missCheck(i,t);
+                        i++;
+                        ttt+=btime[i];
+                    }
+                    if(i==btime.length) clearInterval(button);
+                },1);
+            }
+
+            //
+            window.onload=function() {
+                setTimeout(function() {
+                    document.getElementById("start-subtitle").textContent="click screen to start";
+                },2000)
+            }
+        </script>
+    </head>
+    <body onclick="startGame()"></body>
+        <div id="start-title">CYTUS</div>
+        <div id="start-subtitle">fanmade web-edition</div>
+    </body>
+</html>

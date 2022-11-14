@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src="../info.js"></script>
+        <script src="JS/main.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div id="box">
+            <form id="basicInfo" action="../memorize/index.html" method="POST">
+                <span style="color: lightseagreen;">영어 단어:</span>
+                <input id="ENG" type="text"/>
+                <br/>
+                <span style="color: lightseagreen;">한국어 뜻:</span>
+                <input id="KOR" type="text"/>
+                <br/>
+                <span style="color: grey;">한-영 힌트:</span>
+                <input id="KEHint" type="text"/>
+                <br/>
+                <span style="color: grey;">영-한 힌트:</span>
+                <input id="EKHint" type="text"/>
+                <br/>
+                <span style="color: grey;">글자 색</span>
+                <select id="color" size="1">
+                    <option value="black" selected>검정</option>
+                    <option value="red">빨강</option>
+                    <option value="yellow">노랑</option>
+                    <option value="green">초록</option>
+                    <option value="cyan">하늘</option>
+                    <option value="blue">파랑</option>
+                    <option value="magenta">보라</option>
+                </select>
+                <input id="next" type="button" value="다음" onclick="nextword()"></input>
+            </form>
+        </div>
+    </body>
+</html>

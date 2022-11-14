@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최서인 바보</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            height: 10vh;
+            text-align: center;
+            font-size: 9vh;
+            line-height: 9vh;
+        }
+
+        select, input {
+            width: 10vw;
+            height: 10vh;
+
+            font-size: 8vh;
+            line-height: 8vh;
+
+            position: absolute;
+        }
+
+        input {
+            right: 15vw;
+        }
+
+        textarea {
+            margin: 5vh 0 5vh 0;
+            width: 100%;
+            height: 30vh;
+            resize: none;
+
+            font-size: 50px;
+        }
+
+        #box {
+            margin: 0 10vw 0 10vw;
+            width: 80vw;
+            height: 90vh;
+            
+            display: grid;
+            grid-template-columns: 35vw 10vw 35vw;
+            grid-template-rows: 40vh 10vh 40vh;
+        }
+
+        #box > .item {
+            text-align: center;
+            font-size: 9vh;
+
+            display: flex;
+        }
+
+        #box > .item:nth-child(1) {
+            grid-column: 1 / 4;
+            grid-row: 1 / 2;
+        }
+
+        #box > .item:nth-child(5) {
+            grid-column: 1 / 4;
+            grid-row: 3 / 4;
+        }
+    </style>
+    <script>
+        function or(array, index) {
+            let check = false;
+            for(let i of index) {
+                check = check || array[i];
+            }
+            return check;
+        }
+
+        function and(array, maxIndex, index) {
+            let check = true;
+            for(let i = 1; i <= maxIndex; i++) {
+                check = Math.floor((index-1) / (2**(maxIndex - i))) % 2 ? check && array[i] : check && !array[i];
+            }
+            return check;
+        }
+
+        function from4to2(D) {
+            console.log(typeof(D))
+            return {
+                'A': or(D, [2, 3]),
+                'B': or(D, [1, 3])
+            };
+        }
+
+        function from8to2(D) {
+            return {
+                'A': or(D, [4, 5, 6, 7]),
+                'B': or(D, [2, 3, 6, 7]),
+                'C': or(D, [1, 3, 5, 7])
+            }
+        }
+
+        function from16to2(D) {
+            return {
+                'A': or(D, [8, 9, 10, 11, 12, 13, 14, 15]),
+                'B': or(D, [4, 5, 6, 7, 12, 13, 14, 15]),
+                'C': or(D, [2, 3, 6, 7, 10, 11, 14, 15]),
+                'D': or(D, [1, 3, 5, 7, 9, 11, 13])
+            }
+        }
+
+        function from2to4(D) {
+            if(D[0] != null) D.unshift(0);
+            return {
+                0: and(D, 2, 1),
+                1: and(D, 2, 2),
+                2: and(D, 2, 3),
+                3: and(D, 2, 4),
+            }
+        }
+
+        function from2to8(D) {
+            if(D[0] != null) D.unshift(0);
+            return {
+                0: and(D, 3, 1),
+                1: and(D, 3, 2),
+                2: and(D, 3, 3),
+                3: and(D, 3, 4),
+                4: and(D, 3, 5),
+                5: and(D, 3, 6),
+                6: and(D, 3, 7),
+                7: and(D, 3, 8),
+            }
+        }
+
+        function from2to16(D) {
+            if(D[0] != null) D.unshift(0);
+            return {
+                0: and(D, 4, 1),
+                1: and(D, 4, 2),
+                2: and(D, 4, 3),
+                3: and(D, 4, 4),
+                4: and(D, 4, 5),
+                5: and(D, 4, 6),
+                6: and(D, 4, 7),
+                7: and(D, 4, 8),
+                8: and(D, 4, 9),
+                9: and(D, 4, 10),
+                A: and(D, 4, 11),
+                B: and(D, 4, 12),
+                C: and(D, 4, 13),
+                D: and(D, 4, 14),
+                E: and(D, 4, 15),
+                F: and(D, 4, 16)
+            }
+        }
+
+        function from2nto2(D) {
+            let n = D.length;
+            let m = 1;
+            while(2**m != n) m++;
+            const F = new Array(m);
+            for(let i = 0; i < m; i++) {
+                F[i] = false;
+                for(let j = 1; j < n; j++) {
+                    if(Math.floor(j / (2**i)) % 2 == 1) F[i] = F[i] || D[j];
+                }
+            }
+            return F;
+        }
+
+        function from2to2n(D) {
+            //뭔소리인지 모르겠어서 그냥 짬
+            let F = 0;
+            for(let i = 0; i < D.length; i++) {
+                F += D[i] * (2**i);
+            }
+            return F;
+        }
+
+        function exchange() {
+            const from = Number(document.getElementById('from').value);
+            const to = Number(document.getElementById('to').value);
+            const number = document.getElementById('number').value;
+            let string = new String();
+            let toN = 1;
+            while(2**toN != to) toN++;
+
+            //일단 2진수로 바꾼다.
+            if(from != 2) {
+                for(let i = 0; i < number.length; i++) {
+                    const D = Array.from({length: from}, () => 0);
+                    D[Number(number[i].replace('A', '10').replace('B', '11').replace('C', '12').replace('D', '13').replace('E', '14').replace('F', '15'))] = 1;
+                    const obj = eval(`from${from}to2([${D}])`);
+                    let temp = 0;
+                    for(let key in obj) {
+                        console.log(key)
+                        string += Number(obj[key]);
+                    }
+                }
+            }
+            else string = number;
+
+            let write = new String();
+
+            if(to != 2) {
+                while(string.length % toN != 0) string = 0 + string;
+                string = string.split('');
+
+                while(string.length != 0) {
+                    const n = string.splice(0, toN);
+                    const obj = eval(`from2to${to}([${n}])`);
+                    for(let key in obj) {
+                        if(obj[key] == true) {
+                            write += key;
+                            break;
+                        }
+                    }
+                }
+                while(write[0] == '0') write.pop();
+            }
+            else write = string;
+
+            document.getElementById('print').value = write;
+        }
+    </script>
+</head>
+<body>
+    <h1>변환기</h1>
+    <div id="box">
+        <textarea id="number" class="item">0</textarea>
+
+        <div class="item">
+            <select id="from">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="16">16</option>
+            </select>
+        </div>
+        <div class="item">-></div>
+        <div class="item">
+            <select id="to">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="16">16</option>
+            </select>
+            <input type="button" value="변환" onclick="exchange()"/>
+        </div>
+
+        <textarea id="print" class="item" readonly>0</textarea>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    width: 30%;
+    height: 10%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+#box {
+    width: 50%;
+    height: 70%;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    font-size: 2em;
+    text-align: center;
+
+    position: relative;
+    left: 25%; top: 15%;
+}
+
+#facePreview {
+    width: 50%;
+    height: 60%;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    font-size: 0.2em;
+    text-align: left;
+
+    /*background-image: url();*/
+
+    position: absolute;
+    left: 25%; top: 30%;
+}
+
+#submit {
+    width: 10%;
+    height: 6%;
+    position: absolute;
+    left: 85%; top: 85%;
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ZBヤ존버</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+
+            body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Nanum Gothic', sans-serif;
+            }
+
+            h1 {
+                text-decoration: overline underline;
+                text-underline-position: under;
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+
+            h2 {
+                line-height: 40px;
+            }
+
+            .nava {
+                color: white;
+                text-decoration: none;
+                outline: none;
+            }
+
+            ul {
+                list-style: none;
+            }
+
+            li {
+                padding-left: 20px;
+            }
+
+            #header {
+                padding: 20px;
+                padding-left: 70px;
+
+                width: 100%;
+                height: 100px;
+                box-sizing: border-box;
+
+                background-color: black;
+
+                font-size: 50px;
+                color: white;
+            }
+
+            #section {
+                height: 2500px;
+
+                background-color: grey;
+
+                position: absolute;
+                top: 100px;
+            }
+
+            #menu {
+                margin-top: 10px;
+
+                width: 100%;
+                height: 10%;
+
+                background-color: transparent;
+                border: 0;
+            }
+
+            #nav {
+                width: 0px;
+                height: 100%;
+
+                background-color: rgba(0,0,0,0.7);
+                border-radius: 0 10px 10px 0;
+
+                position: absolute;
+                top: 100px;
+
+                animation-name: start;
+                animation-duration: 0.2s;
+            }
+
+            @keyframes navOut {
+                from{width: 0px;}
+                to{width: 250px;}
+            }
+
+            @keyframes navIn {
+                from{width: 250px;}
+                to{width: 0px;}
+            }
+
+            #content {
+                height: 2500px;
+     
+                background-color: lightgrey;
+
+                position: absolute;
+                top: 100px;
+            }
+
+            #box {
+                margin-left: calc((100% - 853px)/2);
+            }
+
+            .menuIcon {
+                margin-top: 8px;
+
+                height: 4px;
+
+                background-color: white;
+                border-radius: 2px;
+            }
+
+            a {
+                color: black;
+            }
+
+            #video {
+                margin-top: 10%;
+                margin-bottom: 10%;
+            }
+
+            #videoBox {
+                margin-left: calc((100% - 853px)/2);
+            }
+
+            @media screen and (min-width: 10px) and (max-width: 1000px) {
+                li {
+                    padding-top: 100px;
+                    font-size: 20px;
+                }
+                #section {
+                    width: 100px;
+                }
+                #content {
+                    width: calc(100% - 100px);
+                    left: 100px;
+                }
+                #nav {
+                    left: 100px;
+                }
+                .menuIcon {
+                    margin-left: 30%;
+                    width: 40%;
+                }
+                #box {
+                    margin-left: 100px;
+                }
+            }
+
+            @media screen and (min-width: 1000px) {
+                li {
+                    padding-top: 50px;
+                    font-size: 20px;
+                }
+                #section {
+                    width: 50px;
+                }
+                #content {
+                    width: calc(100% - 50px);
+                    left: 50px;
+                }
+                #nav {
+                    left: 50px;
+                }
+                .menuIcon {
+                    margin-left: 10%;
+                    width: 80%;
+                }
+                #box {
+                    margin-left: 200px;
+                }
+            }
+        </style>
+        <script>
+            var Anc=1;
+
+            function Anavout() {
+                Anc=-1;
+                var nav=document.getElementById("nav");
+                nav.style.animationName="navOut";
+                nav.style.width="25%";
+                setTimeout(function() {
+                    nav.innerHTML="<ul><a class='nava' href='http://www.ZBCLAN.kro.kr'><li><b>ZBヤ 클랜</b></li></a><a class='nava'; href='http://tiktok.ZBCLAN.kro.kr'><li><b>TikTok</b></li></a><a class='nava'; href='http://kakao.ZBCLAN.kro.kr'><li><b>들어가는 법</b></li></a><a class='nava'; href='https://battlegroundsmobile.kr'><li><b>배그M 다운받기</b></li></a></ul>";
+                },200);
+            }
+
+            function AnavIn() {
+                Anc=1;
+                var nav=document.getElementById("nav");
+                nav.innerHTML="";
+                nav.style.animationName="navIn";
+                nav.style.width="0px";
+            }
+
+            function Anav() {
+                if(Anc==1) Anavout();
+                else AnavIn();
+            }
+
+            function Atnav() {
+                window.scrollTo(0,0)
+                Anav();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="header"><b>ZB</b>ヤ</div>
+        <div id="content">
+            <div id="videoBox">
+            <div id="video">
+                <iframe width="853" height="450" src="https://www.youtube.com/embed/jdySpgsUsXA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            </div>
+            <div id="box">
+            <h1>&nbsp<b>ZB</b>ヤ 클랜의 뜻&nbsp</h1>
+
+            <h2>존나 버티기(존버)의 줄임말이다.<br/>
+            ZBヤ준이와 ZBヤ킬러가 생각해냈으며,<br/>
+            후에 2기클로 De(딜라이트)를 <br/>
+            받아들였다.
+            </h2>
+
+            <h1>&nbsp<b>ZB</b>ヤ 클랜의 활동&nbsp</h1>
+
+            <h2>초반에는 틱톡에서만 활동하였지만,<br/>
+            현재는 유튜브에서도<br/>
+            활동을 하고 있다.<br/>
+            클랜의 레벨은 9렙이며,<br/>
+            배그M 클랜 랭킹에도 있다.
+            </h2>
+
+            <h1>&nbsp<b>ZB</b>ヤ 클랜 톡방&nbsp</h1>
+
+            <h2>ZBヤ 클랜은 카톡 오픈채팅방에서<br/>
+            클랜원들끼리 소통하는데,<br/>
+            면접을 보고 비번을 얻어서<br/>
+            <a href="https://open.kakao.com/o/guAb4dPb">ZBヤ존버 클랜 톡방</a>에<br/>
+            들어갈 수 있다.
+            </h2>
+
+            <h1>&nbsp<b>ZB</b>ヤ킬러(마스터)&nbsp</h1>
+
+            <h2>ZBヤ킬러는 ZBヤ 클랜의 마스터이다.<br/>
+            ZBヤ준이와 ZBヤ 클랜을 공동 설립했으며<br/>
+            (본인 말로는)티어를 잘 안 올린다고 했다.<br/>
+            </h2>
+
+            <h1>&nbsp<b>ZB</b>ヤ준이&nbsp</h1>
+
+            <h2>ZBヤ준이는 ZBヤ킬러와 함께<br/>
+            ZBヤ 클랜을 만들었으며,<br/>
+            틱톡팔로워가 매우매우 많다.<br/>
+            이 사이트를 만든 장본인이기도 하며,<br/>
+            <a href="http://www.jk77.kro.kr">개인 홈페이지</a>가 있다.
+            </h2>
+            </div>
+        </div>
+        <div id="section" onmouseup="Atnav()">
+            <div id="menu">
+                <div class="menuIcon"></div>
+                <div class="menuIcon"></div>
+                <div class="menuIcon"></div>
+            </div>
+        </div>
+        <div id="nav">
+        </div>
+    </body>
+</html>

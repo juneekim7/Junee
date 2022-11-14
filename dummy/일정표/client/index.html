@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-1 일정</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 6vh;
+        }
+
+        div {
+            width: 100vw;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #header {
+            height: 20vh;
+            background-color: #161616;
+            color: white;
+        }
+
+        #date {
+            width: calc(100vw - 20px);
+        }
+
+        #butt {
+            padding: 0;
+            width: 6vh;
+            height: 6vh;
+            background-color: #747474;
+            border-radius: 3px;
+
+            text-align: center;
+            font-size: 6vh;
+            color: black;
+            line-height: 6vh;
+
+            position: absolute;
+            top: 10px; right: 10px;
+        }
+
+        #console {
+            display: none;
+            padding: 0;
+            width: 100vh;
+            height: 6vh;
+            background-color: #747474;
+            border-radius: 3px;
+
+            text-align: center;
+            font-size: 6vh;
+            color: black;
+            line-height: 6vh;
+
+            position: absolute;
+            top: 10px; right: 10px;
+        }
+
+        #today {
+            height: 40vh;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        #tomorrow {
+            height: 40vh;
+        }
+    </style>
+    <script>
+        const socket = new WebSocket('ws://localhost:3000');
+        const today = new Date();
+        let date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+        
+        socket.onopen = (event) => {
+            socket.send('2023-02-17');
+        }
+
+        //캐릭터 정보 받아오기
+        socket.onmessage = (event) => {
+            const msg = event.data;
+            console.log(msg);
+        }
+    </script>
+</head>
+<body>
+    <div id="header">
+        3-1 일정
+        <input id="date" type="date" value="2022-06-09" min="2022-03-01" max="2023-02-28"/>
+        <div id="butt">+</div>
+    </div>
+    <div id="today">
+        <b>오늘</b>
+    </div>
+    <div id="tomorrow">
+        <b>내일</b>
+        내일꺼 알아서 뭐하게?
+    </div>
+</body>
+</html>

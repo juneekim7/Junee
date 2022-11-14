@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS compile</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #write {
+            width: calc(100vw - 20px);
+            height: calc(100vh - 20px);
+            padding: 10px !important;
+            border: none;
+            font-size: 20px;
+            overflow-y: scroll;
+            resize: none;
+        }
+        #write:focus {
+            border: none;
+            outline: none;
+        }
+        #write::-webkit-scrollbar {
+            width: 6px;
+        }
+        #write::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: rgba(90, 90, 90, 0.6);
+        }
+
+        #test {
+            width: 100px;
+            height: 50px;
+            margin: 10px;
+            background-color: mediumseagreen;
+            border-right: 3px solid seagreen;
+            border-bottom: 3px solid seagreen;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+
+            position: fixed;
+            right: 0;
+            bottom: 0;
+        }
+        #test:hover {
+            border: none;
+            border-left: 3px solid seagreen;
+            border-top: 3px solid seagreen;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function test() {
+            let js=document.getElementById("write").value;
+            js=js.replace(/replier.reply/g,"alert");
+            eval(js);
+            localStorage["jscode"]=js;
+            document.getElementById("write").focus();
+        }
+
+        let tab="";
+        if(localStorage["tab"]!=undefined) tab=localStorage["tab"];
+        function editor() {
+            if(window.event.keyCode==8||window.event.keyCode==46) return;
+            let js=document.getElementById("write").value;
+            if(js[js.length-1]=="{") {
+                tab+="    ";
+                js+="\n"+tab;
+            }
+            else if(js[js.length-1]=="\n") {
+                js+=tab;
+            }
+            else if(js[js.length-1]=="}"&&window.event.keyCode==221) {
+                if(tab=="") return;
+                let s="";
+                for(let i=0;i<js.length-5;i++) {
+                    s+=js[i];
+                }
+                s+="}";
+                js=s;
+                tab=tab.replace("    ","");
+            }
+            else if(js==""||js.length<=1) {
+                tab="";
+            }
+            localStorage["jscode"]=js;
+            localStorage["tab"]=tab;
+            document.getElementById("write").value=js;
+        }
+
+        function start() {
+            if(localStorage["jscode"]!=undefined) document.getElementById("write").value=localStorage["jscode"];
+            document.getElementById("write").focus();
+        }
+
+        window.onload=function() {
+            start();
+        }
+    </script>
+</head>
+<body>
+    <textarea id="write" placeholder="//replier.reply()는 alert()와 같습니다." onkeyup="editor()"></textarea>
+    <div id="test" onclick="test()">실행</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>생신축하드려요</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: lightcoral;
+        }
+
+        #box {
+            width: 100vw;
+            height: 100vh;
+            font-weight: bold;
+            font-size: 10vw;
+            color: snow;
+            display: grid;
+            grid-template-columns: repeat(9, 9fr);
+            align-items: center;
+            animation: animation linear 500ms 600ms;
+        }
+
+        @keyframes animation {
+            100% {transform: rotate(90deg);}
+        }
+
+        .first {
+            font-size: 10vw;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div></div>
+        <div>생</div>
+        <div>신</div>
+        <div>축</div>
+        <div>하</div>
+        <div>드</div>
+        <div>려</div>
+        <div>요</div>
+        <div></div>
+    </div>
+    <script>
+        const box = document.getElementById("box");
+        let i = 0;
+
+        setTimeout(() => {
+            setInterval(() => {
+                box.style.fontSize = "5vw";
+                box.style.gridTemplateColumns = "1fr";
+                box.style.paddingLeft = "20px";
+                box.innerHTML = `
+                    <div></div>
+                    <div><span class="first">생</span>${"신을 맞은 우리 엄마".substr(0, i)}</div>
+                    <div><span class="first">신</span>${"나는 하루 보내세요. 정말".substr(0, i)}</div>
+                    <div><span class="first">축</span>${"하드리고 슬픈 날보다".substr(0, i)}</div>
+                    <div><span class="first">하</span>${"하하 웃는 날이 많길 바랍니다.".substr(0, i)}</div>
+                    <div><span class="first">드</span>${"넓은 마음씨를 가진 우리 엄마".substr(0, i)}</div>
+                    <div><span class="first">려</span>${"(여)유로운 삶을 사시길 응원하며".substr(0, i)}</div>
+                    <div><span class="first">요</span>${" 편지를 마치겠습니다. 축하드려요~".substr(0, i)}</div>
+                    <div></div>
+`;
+                i++;
+            }, 100);
+        }, 1000);
+    </script>
+</body>
+</html>

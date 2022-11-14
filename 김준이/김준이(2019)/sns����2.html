@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
+        <meta charset="utf-8">
+        <style>
+            body {
+                background: ghostwhite;
+                margin: 0;
+                padding: 0;
+            }
+
+            a {
+                text-decoration-line: none;
+                color: lightsteelblue;
+                font-size: 60%;
+            }
+
+            a:hover {
+                font-size: 75%;
+            }
+
+            #nav {
+                background: whitesmoke;
+                width: 100%;
+                font-family: "Sunflower",sans-serif;
+                padding-top: 1%;
+                border-bottom: 3px solid gainsboro;
+            }
+
+            @media screen and (min-width: 10px) and (max-width: 1000px) {
+                #nav {
+                    height: 5.3%;
+                }
+            }
+
+            @media screen and (min-width: 1000px) {
+                #nav {
+                    height: 12%;
+                }
+            }
+
+            .link {
+                background: transparent;
+                width: 25%;
+                height: 100%;
+                margin-right: -4px;
+                text-align: center;
+                color: lightseagreen;
+                font-size: 300%;
+                font-family: "Sunflower",sans-serif;
+                display: inline-block;
+            }
+
+            .outer {
+                display: table;
+                width: 100%;
+                height: 100%;
+            }
+            
+            .inner {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            #contents {
+                background: snow;
+                border: 2px solid lightseagreen;
+                box-sizing: border-box;
+                width: 100%;
+                line-height: 100%;
+                font-family: "Sunflower",sans-serif;
+            }
+
+            .intro {
+                background: transparent;
+                width: 100%;
+                height: 0;
+                padding-bottom: 75%;
+                line-height: 150%;
+                text-indent: 1%;
+                vertical-align: middle;
+                display: inline-block;
+            }
+
+            @media screen and (min-width: 10px) and (max-width: 1000px) {
+                .intro {
+                    font-size: 260%;
+                }
+            }
+
+            @media screen and (min-width: 1000px) {
+                .intro {
+                    font-size: 200%;
+                }
+            }
+
+            #insta {
+                margin: 5%;
+            }
+
+            #instaimg {
+                background: transparent;
+                background-image: url("https://instagram-brand.com/wp-content/uploads/2016/11/Instagram_AppIcon_Aug2017.png?w=1500");
+                background-size: 100%;
+                background-position: center center;
+                background-repeat: no-repeat;
+                width: 45%;
+                padding-bottom: 60%;
+                height: 0;
+                text-align: center;
+                display: inline-block;
+            }
+
+            #instaimg:hover {
+                border-top: 2px solid transparent;
+                border-left: 2px solid transparent;
+                cursor: pointer;
+            }
+
+            #instaintro {
+                width: calc(55% - 55px);
+                padding-bottom: 60%;
+                height: 0;
+                font-size: 80%;
+                float: right;
+            }
+
+            #mobile {
+                width: 100%;
+                height: 65%;
+            }
+
+            @media screen and (min-width: 1000px) {
+                #linkbox {
+                    background: transparent;
+                    width: 70%;
+                    height: 100%;
+                    margin: 0 auto;
+                }
+                #box {
+                    width: 70%;
+                    background: transparent;
+                    margin: 0 auto;
+                }
+                #contents {
+                    margin-top: 70px;
+                    margin-bottom: 70px;
+                }
+                #mobile {
+                    width: 0;
+                    height: 0;
+                }
+            }
+        </style>
+        <script>
+            
+        </script>
+        <title>김준이</title>
+    </head>
+    <body>
+        <div id="nav">
+            <div id="linkbox">
+                <div class="link"><a href="http://www.jk77.kro.kr">HOME</a></div>
+                <div class="link"><a href="http://intro.jk77.kro.kr">개인정보</a></div>
+                <div class="link">sns</div>
+                <div class="link"><a href="http://gallery.jk77.kro.kr">갤러리</a></div>
+            </div>
+        </div>
+        <div id="box">
+            <div id="contents">
+                <div class="intro">
+                    <div id="insta">
+                        <div id="instaimg" onclick="location.href='https://www.instagram.com/juneekim7/'">
+                            <font color="F00075">인스타그램</font>
+                        </div>
+                        <div id="instaintro">
+                            <br/><br/><br/>인스타그램은<br/>
+                            제가 가장 많이 이용하는 sns입니다.<br/>
+                            아이디는 <a href="https://www.instagram.com/juneekim7/" style="font-size: 100%;">
+                                juneekim7
+                            </a> 입니다.<br/>
+                        </div>
+                    </div>
+                </div>
+                <div id="mobile"></div>
+            </div>
+        </div>
+    </body>
+</html>

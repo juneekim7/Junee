@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <title>메봇 ide</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box !important;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        textarea {
+            border: none;
+            outline: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-y: auto;
+            resize: none;
+        }
+
+        header {
+            position: fixed;
+            width: 100vw;
+            height: 60px;
+            background-color: white;
+            box-shadow: 0 4px 16px 0 rgba(0,0,0,0.04);
+            z-index: 100;
+        }
+
+        main {
+            position: fixed;
+            top: 60px;
+            width: 100vw;
+            height: calc(100vh - 60px);
+        }
+
+        #editor {
+            position: fixed;
+            width: calc(100vw - 330px);
+            height: 100%;
+            z-index: 1;
+        }
+
+        #debug {
+            position: fixed;
+            right: 0;
+            width: 330px;
+            height: 100%;
+            background-color: #fff0f0;
+            box-shadow: -4px 0 16px 0 rgba(0,0,0,0.04);
+            z-index: 50;
+        }
+        #debug-screen {
+            padding: 10px 0 10px 0;
+            width: 100%;
+            height: calc(100vh - 100px - 60px);
+            overflow-y: scroll;
+        }
+        #debug-screen::-webkit-scrollbar {
+            width: 6px;
+        }
+        #debug-screen::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: rgba(90, 90, 90, 0.6);
+        }
+        #debug-input {
+            width: calc(100% - 20px);
+            height: calc(100px - 10px);
+            padding: 10px;
+            padding-bottom: 0;
+            background-color: white;
+            font-size: 20px;
+        }
+        #debug-input::-webkit-scrollbar {
+            width: 6px;
+        }
+        #debug-input::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: rgba(90, 90, 90, 0.6);
+        }
+
+        .chat-mine {
+            float: right;
+            clear: both;
+            margin: 2px 5px 2px 0;
+            padding: 6px;
+            width: fit-content;
+            background-color: #FBEA00;
+            border-radius: 5px 0 5px 5px;
+            box-shadow: 0 0 3px 1px rgba(0,0,0,0.04);
+            font-size: 15px;
+        }
+        .chat-bot {
+            float: left;
+            clear: both;
+            margin: 2px 0 2px 5px;
+            padding: 6px;
+            width: fit-content;
+            background-color: white;
+            border-radius: 0 5px 5px 5px;
+            box-shadow: 0 0 3px 1px rgba(0,0,0,0.04);
+            font-size: 15px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
+    <script>
+        //variable
+        let _variable = new Object();
+
+        //generate editor
+        require.config({ paths: { "vs": 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs' }});
+        require(['vs/editor/editor.main'], () => {
+            _variable["editor"] = monaco.editor.create(document.getElementById('editor'), {
+                language: "javascript",
+                value: localStorage[localStorage["file"]],
+            });
+        });
+
+        //save
+        function save() {
+            localStorage[localStorage["file"]]=_variable["editor"].getValue();
+        }
+
+        //compile
+        _variable["reserved"] = `
+const imageDB = {
+    getProfileBase64() {
+        return "profileImage";
+    },
+    getProfileImage() {
+        return "profileImage";
+    },
+    getProfileBitmap() {
+        return "android.graphics.Bitmap@bitmap";
+    },
+    getImage() {
+        return null;
+    }
+};
+
+const Api = {
+    getContext() {
+        return "getContext";
+    },
+    reload(scriptName = true, throwOnError = false) {
+        return true;
+    },
+    compile(scriptName = true, throwOnError = false) {
+        return true;
+    },
+    prepare(scriptName) {
+        if(scriptName == localStorage["scriptName"]) return 2;
+        else return 1;
+    },
+    unload(scriptName) {
+        return true;
+    },
+    off(scriptName = true) {
+        return true;
+    },
+    on(scriptName = true) {
+        return true;
+    },
+    isOn(scriptName = true) {
+        return true;
+    },
+    isCompiled(scriptName = true) {
+        return true;
+    },
+    isCompiling(scriptName = true) {
+        return true;
+    },
+    getScriptNames() {
+        return false;
+    },
+    replyRoom(room, msg) {
+        if(room == localStorage["room"] && msg.replace(/\\n/g,"").replace(/ /g,"")!="") {
+            let chat = document.getElementById("debug-screen").innerHTML;
+            chat += '<div class="chat-bot">' + msg.replace(/\\n/g,'<br/>') + '</div>';
+            document.getElementById("debug-screen").innerHTML = chat;
+            return true;
+        }
+        return false;
+    },
+    canReply(room) {
+        if(room == localStorage["room"]) return true;
+        else return false;
+    },
+    showToast(content, length) {
+        alert(content);
+    },
+    makeNoti(title, content, id) {
+        alert(title+content);
+        return true;
+    },
+    papagoTranslate(sourceLanguage, targetLanguage, content, errorToString = false) {
+        return "translated Result";
+    }
+};
+
+const Utils = {
+    getWebText(url) {
+        return url+" html code";
+    },
+    parse(url) {
+        return url+" html code in org.jsoup.nodes.Document";
+    },
+    getAndroidVersionCode() {
+        return 0; //int
+    },
+    getAndroidVersionName() {
+        return "Android version name";
+    },
+    getPhoneBrand() {
+        return "Your phone brand";
+    },
+    getPhoneModel() {
+        return "Your phone model name";
+    }
+};
+
+const FileStream = {
+    read(path) {
+        if(typeof path != string) return;
+        return localStorage[path];
+    },
+    write(path, data) {
+        if(typeof path != string) return;
+        data += "";
+        localStorage[path] = data;
+        return localStorage[path];
+    },
+    append(path, data) {
+        if(typeof path != string) return;
+        data += "";
+        localStorage[path] += data;
+        return localStorage[path];
+    },
+    remove(path) {
+        if(typeof path != string) return false;
+        localStorage[path] = undefined;
+    }
+};
+
+const DataBase = {
+    setDataBase(fileName, data) {
+        if(typeof fileName != string) return;
+        if(fileName.indexOf(".")==-1) fileName+=".txt";
+        data += "";
+        localStorage["sdcard/Bots/bot/Database/"+fileName] = data;
+        return localStorage[fileName];
+    },
+    getDataBase(fileName) {
+        if(typeof fileName != string) return;
+        if(fileName.indexOf(".")==-1) fileName+=".txt";
+        return localStorage["sdcard/Bots/bot/Database/"+fileName];
+    },
+    appendDataBase(fileName, data) {
+        if(typeof fileName != string) return;
+        if(fileName.indexOf(".")==-1) fileName+=".txt";
+        data += "";
+        localStorage["sdcard/Bots/bot/Database/"+fileName] += data;
+        return localStorage[fileName];
+    },
+    removeDataBase(fileName) {
+        if(typeof fileName != string) return false;
+        localStorage["sdcard/Bots/bot/Database/"+fileName] = undefined;
+    }
+};
+
+const Log = {
+    d(data, ShowToast = false) {
+        return;
+    },
+    debug(data, ShowToast = false) {
+        return;
+    },
+    e(data, ShowToast = false) {
+        return;
+    },
+    error(data, ShowToast = false) {
+        return;
+    },
+    i(data, ShowToast = false) {
+        return;
+    },
+    info(data, ShowToast = false) {
+        return;
+    }
+};
+
+const Device = {
+    getBuild() {
+        return "android.os.Build value";
+    },
+    getAndroidVersionCode() {
+        return 0; //int
+    },
+    getAndroidVersionName() {
+        return "Android version name";
+    },
+    getPhoneBrand() {
+        return "Your phone brand";
+    },
+    getPhoneModel() {
+        return "Your phone model name";
+    },
+    isCharging() {
+        return false;
+    },
+    getPlugType() {
+        return "ac";
+    },
+    getBatteryLevel() {
+        return 50;
+    },
+    getBatteryHealth() {
+        return 0; //int
+    },
+    getBatteryTemperature() {
+        return 250;
+    },
+    getBatteryVoltage() {
+        return 220;
+    },
+    getBatteryStatus() {
+        return 0; //int
+    },
+    getBatteryIntent() {
+        return "context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED)) value";
+    }
+};
+
+const Bridge = {
+    getScopeOf(scriptName) {
+        return "org.mozilla.javascript.ScriptableObject";
+    },
+    isAllowed(scriptName) {
+        return false;
+    }
+};
+\n`;
+
+        //debug
+        function debugInputKey() {
+            if(event.keyCode == 13 && event.shiftKey == false) {
+                if(document.getElementById("debug-input").value.replace(/\n/g,"").replace(/ /g,"")=="") {
+                    setTimeout( () => { document.getElementById("debug-input").value = ""; }, 1);
+                    return;
+                }
+                let chat = document.getElementById("debug-screen").innerHTML;
+                chat += `<div class="chat-mine"> ${document.getElementById("debug-input").value.replace(/\n/g,'<br/>')} </div>`;
+                document.getElementById("debug-screen").innerHTML = chat;
+                if(_variable["editor"].getValue().indexOf("_variable")==-1) eval(_variable["reserved"] + _variable["editor"].getValue() + `response("${localStorage["room"]}", "${document.getElementById("debug-input").value}", "${localStorage["sender"]}", false, {reply(msg) {Api.replyRoom("${localStorage["room"]}",msg)}}, false, false, false);`);
+                else alert("Cannot test script that contains '_variable'")
+                setTimeout( () => { document.getElementById("debug-input").value = ""; }, 1);
+            }
+        }
+
+        //start
+        function start() {
+            if(localStorage["file"] == undefined) {
+                localStorage["sdcard/Bots/bot/bot.js"] = 'const scriptName = "bot";\n\nfunction response(room, msg, sender, isGroupChat, replier, imageDB, packageName, threadId) {\n    \n}';
+                localStorage["file"] = "sdcard/Bots/bot/bot.js";
+            }
+            if(localStorage["room"] == undefined) localStorage["room"] = "debug room";
+            if(localStorage["sender"] == undefined) localStorage["sender"] = "person1";
+            if(localStorage["scriptName"] == undefined) localStorage["scriptName"] = "bot";
+        }
+
+        window.onload = () => {
+            start();
+        }
+    </script>
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <div id="editor" onkeyup="save()"></div>
+        <div id="debug">
+            <div id="debug-screen"></div>
+            <textarea id="debug-input" onkeydown="debugInputKey()"></textarea>
+        </div>
+    </main>
+</body>
+</html>

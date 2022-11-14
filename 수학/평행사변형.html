@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>평행사변형</title>
+    <style>
+        @media(orientation: portrait) {
+            html {
+                width: 100vh;
+                height: 100vw;
+
+                position: absolute;
+                top: 100%;
+                right: 0;
+
+                transform: rotate(90deg);
+                transform-origin: top right;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            margin: 0 10px 0 10px;
+            width: 30vmin;
+            height: 15vmin;
+            border: 2px solid black;
+            outline: none;
+
+            text-align: center;
+            font-family: Cambria;
+            font-size: calc(0.9 * 15vmin);
+        }
+
+        #parallelogram {
+            height: 45vmin;
+            border: 5px solid black;
+
+            position: fixed;
+            bottom: 50vmin;
+        }
+
+        .diagonal {
+            width: 5px;
+            background-color: black;
+
+            position: absolute;
+
+            transform-origin: top center;
+        }
+
+        .angle-input, .angle-output {
+            font-family: Cambria;
+            font-size: 30px;
+            font-weight: bold;
+            font-style: italic;
+            
+            position: absolute;
+        }
+
+        .angle-input {
+            bottom: 5px;
+        }
+
+        .angle-output {
+            color: #f08080;
+        }
+
+        #text {
+            width: 100vmax;
+
+            text-align: center;
+            line-height: calc(1.40 * 15vmin);
+            font-family: Cambria;
+            font-size: 15vmin;
+            
+            position: fixed;
+            top: calc(50vmin + 20px);
+        }
+    </style>
+    <script name="basic functions">
+        function random(n1, n2 = 0) {
+            return n1 < n2 ? Math.floor(Math.random() * (n2 - n1)) + n1 : Math.floor(Math.random() * (n1 - n2)) + n2;
+        }
+
+        function radToDeg(rad) {
+            return rad * 180 / Math.PI;
+        }
+
+        function degToRad(deg) {
+            return deg * Math.PI / 180;
+        }
+
+        function checkString(string, array) {
+            if(typeof(array) == "string") array = [array];
+            for(let check of array) {
+                if(string == check) return true;
+            }
+            return false;
+        }
+
+        function setStyle(object, style, value) {
+            if(typeof(style) == "string") {
+                style = [style];
+                value = [value];
+            }
+            for(let i = 0; i < style.length; i++) {
+                object.style.setProperty(style[i], value[i]);
+            }
+        }
+    </script>
+    <script>
+        const rad90 = Math.PI / 2;
+
+        function S(x, y) {
+            return Math.sqrt((1 / Math.sin(x))**2 + (1 / Math.sin(y))**2 - 2 * Math.cos(x + y) / (Math.sin(x) * Math.sin(y)));
+        }
+
+        function A(x, y) {
+            return Math.acos(1 / (Math.sin(x) * S(x, y)) - Math.cos(x + y) / (Math.sin(y) * S(x, y)));
+        }
+
+        function B(x, y) {
+            return Math.acos(1 / (Math.sin(y) * S(x, y)) - Math.cos(x + y) / (Math.sin(x) * S(x, y)));
+            //or A(y, x);
+        }
+
+        function changeParallelogram(x, y, a, b) {
+            const parallelogram = document.getElementById("parallelogram");
+            const diagonal = document.getElementsByClassName("diagonal");
+            const angleInput = document.getElementsByClassName("angle-input");
+            const angleOutput = document.getElementsByClassName("angle-output");
+            const angleInner = document.getElementsByClassName("angle-inner");
+            const height = Number(window.getComputedStyle(parallelogram).getPropertyValue("height").replace("px", ""));
+            const width = height / Math.tan(a + x) + height / Math.tan(y);
+            const skew = -rad90 + a + x;
+
+            setStyle(parallelogram, ["width", "left", "transform"], [`${width}px`, `calc(50vmax - ${width/2}px)`, `skewX(${skew}rad)`]);
+            setStyle(diagonal[0], ["height", "top", "left", "transform"], [`${height / Math.sin(y) + 5}px`, "-2px", "-5px", `skewX(${-skew}rad) rotate(${-rad90 + y}rad)`]);
+            setStyle(diagonal[1], ["height", "left", "transform"], [`${height / Math.sin(x) + 5}px`, `${width}px`, `skewX(${-skew}rad) rotate(${rad90 - x}rad)`]);
+            setStyle(angleInput[0], ["left", "transform"], [`${width / 6}px`, `skewX(${-skew}rad)`]);
+            setStyle(angleInput[1], ["right", "transform"], [`${width / 6}px`, `skewX(${-skew}rad)`]);
+            setStyle(angleOutput[0], ["right", "top"], [`${width / 12}px`, `${height / 6}px`]);
+            setStyle(angleInner[0], "transform", `skewX(${-skew}rad)`);
+            setStyle(angleOutput[1], ["right", "bottom"], [`${width / 12}px`, `${height / 6}px`]);
+            setStyle(angleInner[1], "transform", `skewX(${-skew}rad)`);
+        }
+
+        function changeText(x, y, a, b) {
+            document.getElementById("x").value = `${Math.round(radToDeg(x) * 10) / 10}°`;
+            document.getElementById("y").value = `${Math.round(radToDeg(y) * 10) / 10}°`;
+            document.getElementById("a").textContent = `${Math.round(radToDeg(a) * 10) / 10}°`;
+            document.getElementById("b").textContent = `${Math.round(radToDeg(b) * 10) / 10}°`;
+        }
+
+        function inputKeyUp() {
+            if(event.keyCode != 13) return false;
+            let x = document.getElementById("x").value.replace(/ /g, "").replace(/pi/g, `*${String(Math.PI)}`).replace(/PI/g, `*${String(Math.PI)}`);
+            let y = document.getElementById("y").value.replace(/ /g, "").replace(/pi/g, `*${String(Math.PI)}`).replace(/PI/g, `*${String(Math.PI)}`);
+            if(checkString(x[x.length - 1], ["°", "도"])) x = x.substr(0, x.length - 1);
+            if(checkString(y[y.length - 1], ["°", "도"])) y = y.substr(0, y.length - 1);
+            if(x[0] == "*") x = "1" + x;
+            if(y[0] == "*") y = "1" + y;
+            if(isNaN(Number(x.replace(/\//g, "").replace(/\*/g, "").replace(/\./g, ""))) == false) x = eval(x);
+            if(isNaN(Number(y.replace(/\//g, "").replace(/\*/g, "").replace(/\./g, ""))) == false) y = eval(y);
+            setParallelogram(Number(x), Number(y));
+        }
+
+        function setParallelogram(x, y) {
+            console.log(x)
+            if(isNaN(x) || isNaN(y)) {
+                alert("수를 입력해주세요.");
+                return;
+            }
+            else if(x <= 0 || y <= 0 || x + y >= 180) {
+                alert("범위가 맞지 않습니다.");
+                return;
+            }
+            if(x >= Math.PI) x = degToRad(x);
+            if(y >= Math.PI) y = degToRad(y);
+            if(x + y >= Math.PI) {
+                alert("범위가 맞지 않습니다.");
+                return;
+            }
+            localStorage["x"] = x;
+            localStorage["y"] = y;
+    
+            const a = A(x, y);
+            const b = B(x, y);
+
+            changeParallelogram(x, y, a, b);
+            changeText(x, y, a, b);
+        }
+
+        window.onload = () => {
+            isNaN(Number(localStorage["x"])) == true || isNaN(Number(localStorage["y"])) == true ? setParallelogram(15, 30) : setParallelogram(Number(localStorage["x"]), Number(localStorage["y"]));
+        }
+    </script>
+</head>
+<body>
+    <div id="parallelogram">
+        <div class="diagonal"></div>
+        <div class="diagonal"></div>
+        <div class="angle-input">x</div>
+        <div class="angle-input">y</div>
+        <div class="angle-output"><div class="angle-inner">a</div></div>
+        <div class="angle-output"><div class="angle-inner">b</div></div>
+    </div>
+    <div id="text">
+        <span style="font-style: italic;">x</span> = <input id="x" type="text" onkeyup="inputKeyUp()"/>, 
+        <span style="font-style: italic;">y</span> = <input id="y" type="text" onkeyup="inputKeyUp()"/> <br/>
+        => 
+        <span style="color: #f08080; font-style: italic;">a</span> = <span id="a"></span>, 
+        <span style="color: #f08080; font-style: italic;">b</span> = <span id="b"></span>
+    </div>
+</body>
+</html>

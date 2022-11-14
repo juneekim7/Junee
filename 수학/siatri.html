@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>sia-tri</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            #content {
+                height: 500px;
+            }
+
+            #input {
+                width: 160px;
+                height: 40px;
+                position: relative;
+                left: calc(50vw - 75px);
+            }
+            #level {
+                width: 100px;
+                height: 100%;
+                margin: 0;
+            }
+            #sub {
+                width: 50px;
+                height: 100%;
+                margin: 0;
+            }
+
+            .tri {
+                position: fixed;
+            }
+        </style>
+        <script>
+            let dlevel;
+            let stpx=window.innerWidth/2;
+
+            function sia(x, y, length, level) {
+                if(level==0) {
+                    document.getElementById("content").innerHTML+='<div class="tri tri-default" style="left: '+(x-length/2)+'px; top: '+y+'px; border-bottom: '+length+'px solid seagreen; border-left: '+length/2+'px solid transparent; border-right: '+length/2+'px solid transparent;"></div>';
+                    return;
+                }
+                length/=2;
+                sia((x), y, length, level-1);
+                sia((x-length/2), (y+length), length, level-1);
+                sia((x+length/2), (y+length), length, level-1);
+            }
+
+            function main() {
+                dlevel=document.getElementById("level").value;
+                document.getElementById("content").innerHTML="";
+                sia(stpx, 50, 400, dlevel);
+            }
+
+            function enter() {
+                if(event.keyCode==13) {
+                    main();
+                }
+            }
+
+            function start() {
+                main();
+            }
+            window.onload = function() {
+                start();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <div id="input">
+            <input id="level" type="text" value="0" placeholder="단계" onkeydown="enter();"/>
+            <input id="sub" type="button" value="확인" onclick="main();"/>
+        </div>
+    </body>
+</html>

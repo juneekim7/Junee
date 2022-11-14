@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김준이</title>
+    <style type="text/css" media="screen and (min-width: 426px)">
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            color: #070707;
+
+            -webkit-tap-highlight-color: transparent;
+        }
+        *::selection {
+            background-color: transparent;
+        }
+        *:hover {
+            cursor: default;
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        body {
+            background-color: #f7f7f7;
+        }
+
+        #home {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #main {
+            width: 100vw;
+            height: 20vh;
+
+            line-height: 20vh;
+            text-align: center;
+            font-size: 18vh;
+            font-weight: bold;
+
+            position: absolute;
+            top: 40vh;
+        }
+
+        #selected {
+            display:inline-block;
+            z-index: 1;
+
+            width: 30vw;
+            height: 18vh;
+            background-color: #070707; /*#1c1c1c in select*/
+
+            line-height: 18vh;
+            text-align: center;
+            font-size: 10vh;
+            font-weight: bold;
+            color: #f7f7f7;
+
+            position: absolute;
+            top: 2vh;
+        }
+        #selected:hover {
+            cursor: pointer;
+        }
+
+        #space {
+            display: inline-block;
+
+            width: 30vw;
+        }
+
+        #navigation {
+            display: none;
+
+            width: 30vw;
+            height: 100vh;
+            background-color: #070707;
+
+            position: absolute;
+        }
+
+        #align {
+            position: relative;
+        }
+
+        .select {
+            width: 30vw;
+            height: 18vh;
+
+            line-height: 18vh;
+            text-align: center;
+            font-size: 10vh;
+            font-weight: bold;
+            color: #22475F;
+
+            position: relative;
+        }
+        .select:hover {
+            cursor: pointer;
+        }
+
+        .arrow {
+            font-size: 12vh;
+            color: #f7f7f7
+        }
+
+        #page {
+            display: none;
+
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #title {
+            width: 15vw;
+            height: 9vh;
+            background-color: #070707;
+
+            line-height: 9vh;
+            text-align: center;
+            font-size: 5vh;
+            font-weight: bold;
+            color: #f7f7f7;
+
+            position: absolute;
+            top: 3vh; left: 3vh;
+        }
+        #title:hover {
+            cursor: pointer;
+        }
+
+        #content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 80vw;
+            height: 88vh;
+
+            line-height: 9vh;
+            text-align: center;
+            font-size: 5vh;
+
+            position: absolute;
+            top: 12vh; left: 10vw;
+        }
+
+        .arrow2 {
+            height: 20vh;
+
+            line-height: 20vh;
+            font-family: 'Manrope', sans-serif;
+            font-size: 20vh;
+            font-weight: bold;
+
+            position: absolute;
+            top: 46vh;
+        }
+        .arrow2:hover {
+            cursor: pointer;
+        }
+        .arrow2:nth-child(4) {
+            left: 5vh;
+        }
+        .arrow2:nth-child(5) {
+            right: 5vh;
+        }
+
+        .tutorial {
+            text-align: center;
+            font-weight: normal;
+            color: #22475F;
+
+            position: absolute;
+        }
+        #main > .tutorial {
+            width: 30vw;
+
+            line-height: 3.5vh;
+            font-size: 3.5vh;
+
+            top: -6vh;
+        }
+        #page > .tutorial {
+            line-height: 9vh;
+            font-size: 3vh;
+
+            top: 3vh; left: 18vw;
+        }
+
+        .pconly {
+            color: #22475F;
+        }
+
+        #tutorial-arrow {
+            display: none;
+        }
+    </style>
+    <style type="text/css" media="screen and (max-width: 425px)">
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            color: #070707;
+
+            -webkit-tap-highlight-color: transparent;
+        }
+        *::selection {
+            background-color: transparent;
+        }
+        *:hover {
+            cursor: default;
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        body {
+            background-color: #f7f7f7;
+        }
+
+        #home {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #main {
+            width: 90vw;
+            height: 40vh;
+
+            line-height: 13vh;
+            text-align: left;
+            font-size: 13vh;
+            font-weight: bold;
+
+            position: absolute;
+            top: 30vh; left: 5vw;
+        }
+
+        #selected {
+            display:inline-block;
+            z-index: 1;
+
+            width: 90vw;
+            height: 14vh;
+            background-color: #070707; /*#1c1c1c in select*/
+
+            line-height: 14vh;
+            text-align: center;
+            font-size: 8vh;
+            font-weight: bold;
+            color: #f7f7f7;
+
+            position: relative;
+        }
+        #selected:hover {
+            cursor: pointer;
+        }
+
+        #space {
+            display: none;
+        }
+
+        #navigation {
+            display: none;
+
+            width: 90vw;
+            height: 100vh;
+            background-color: #070707;
+
+            position: absolute;
+        }
+
+        #align {
+            position: relative;
+        }
+
+        .select {
+            width: 90vw;
+            height: 14vh;
+
+            line-height: 14vh;
+            text-align: center;
+            font-size: 8vh;
+            font-weight: bold;
+            color: #22475F;
+
+            position: relative;
+        }
+        .select:hover {
+            cursor: pointer;
+        }
+
+        .arrow {
+            font-size: 12vh;
+            color: #f7f7f7
+        }
+
+        #page {
+            display: none;
+
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #title {
+            width: 60vw;
+            height: 9vh;
+            background-color: #070707;
+
+            line-height: 9vh;
+            text-align: center;
+            font-size: 5vh;
+            font-weight: bold;
+            color: #f7f7f7;
+
+            position: absolute;
+            top: 3vh; left: 3vh;
+        }
+        #title:hover {
+            cursor: pointer;
+        }
+
+        #content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 80vw;
+            height: 88vh;
+
+            line-height: 4vh;
+            font-size: 2.5vh;
+
+            position: absolute;
+            top: 12vh; left: 10vw;
+        }
+
+        .arrow2 {
+            width: 20vh;
+            height: 20vh;
+
+            line-height: 17vh;
+            text-align: center;
+            font-family: 'Manrope', sans-serif;
+            font-size: 20vh;
+            font-weight: normal;
+
+            position: absolute;
+            left: calc(50vw - 10vh);
+
+            transform-origin: 50% 50%;
+            transform: rotate(90deg);
+        }
+        .arrow2:hover {
+            cursor: pointer;
+        }
+        .arrow2:nth-child(4) {
+            top: 15vh;
+        }
+        .arrow2:nth-child(5) {
+            bottom: -3vh;
+        }
+
+        .tutorial {
+            text-align: center;
+            font-weight: normal;
+            color: #22475F;
+
+            position: absolute;
+        }
+        #main > .tutorial {
+            width: fit-content;
+
+            line-height: 3vh;
+            font-size: 2.5vh;
+
+            bottom: -25vh; right: 5vw;
+        }
+        #page > .tutorial {
+            width: 60vw;
+
+            line-height: 9vh;
+            text-align: center;
+            font-size: 2vh;
+
+            top: 9vh; left: 3vh;
+        }
+
+        .pconly {
+            display: none;
+        }
+
+        #tutorial-arrow {
+            width: 1.2vw;
+            height: 27vh;
+            background-color: #22475F;
+
+            position: absolute;
+            bottom: -20vh; right: 10vw;
+        }
+        #tutorial-arrow::after {
+            width: 0vw;
+            height: 0vh;
+            border-left: 1.2vh solid transparent;
+            border-right: 1.2vh solid transparent;
+            border-bottom: calc(1.732vh * 1.2) solid #22475F;
+            
+            content: '';
+
+            position: absolute;
+            top: -2vh; left: -0.95vh;
+        }
+    </style>
+    <!--기본 변수 & 함수-->
+    <script>
+        //자동화 만들어야함
+        const divName = ['home', 'main', 'selected', 'particle', 'navigation', 'align', 'page', 'title', 'content'];
+        const div = {
+            select: document.getElementsByClassName('select'),
+            tutorial: document.getElementsByClassName('tutorial'),
+            arrow2: document.getElementsByClassName('arrow2')
+        };
+        const data = {
+            '프로필': {
+                particle: '은',
+                content: `제 이름은 김준이 이며, 07년생 남자입니다.
+                서울에 거주하고 있고, KSA 23학번 입니다.
+                생일은 2월 17일입니다.`
+            },
+            '외형': {
+                particle: '은',
+                content: `키는 163cm에 몸무게는 40kg 입니다.
+                둥근 안경을 끼고 있습니다.`
+            },
+            '성격': {
+                particle: '은',
+                content: `MBTI 는 INTP입니다.
+                처음에는 낯을 조금 가립니다.
+                그러나 친해지면 즐겁게 지낼 수 있습니다.`
+            },
+            '좋아하는 것': {
+                particle: '은',
+                content: `좋아하는 게임: 팬텀포스, 발로란트
+                좋아하는 가수: 기리보이, zutomayo(ACAね), 아이유
+                좋아하는 앨범: 기리보이 - 치명적인 앨범 III, 아이유 - Love poem
+                좋아하는 악기: 베이스
+                좋아하는 치킨: 교촌치킨
+                호불호: 민초 불호, 파인애플 피자 중립`
+            },
+            '프로젝트': {
+                particle: '는',
+                content: `김준이 홈페이지 (2018~2023): <a href="http://www.juneekim7.kro.kr" target="_blank">www.juneekim7.kro.kr</a>
+                권총 시뮬레이션 (2019): <a href="http://pistol.jkgun.kro.kr" target="_blank">pistol.jkgun.kro.kr</a>
+                <s>클라비스 (2020)</s>
+                눈 보호(들어가지 마세요.) (2020): <a href="http://protect.eyes.kro.kr" target="_blank">protect.eyes.kro.kr</a>
+                준이봇 (2020): <a href="https://open.kakao.com/me/juneebot7" target="_blank">준이봇 바로가기</a>
+                평행사변형 (2022): <a href="http://pa.rall.kro.kr" target="_blank">pa.rall.kro.kr</a>
+                flev.io (2022): <a href="http://flev.io" target="_blank">flev.io</a>`
+
+            },
+            '수상경력': {
+                particle: '은',
+                content: `제 36회 한국정보올림피아드 1차 대회 지역부문 장려상
+                제 36회 한국정보올림피아드 1차 대회 전국부문 동상
+                제 36회 한국정보올림피아드 2차 대회 장려상
+                제 52회 과학의 날 과학기술정보통신부 장관상
+                제 1회 서운중학교 과학정보코딩 대회 금상(1위)`
+            },
+            '활동경력': {
+                particle: '은',
+                content: `2018년 서울교육대학교과학영재원 융합1반
+                2019년 서울교육대학교과학영재원 사사 정보반
+                2020년 한양대영재원 심화반
+                2021년 서울대학교 사사 정보과학 영재원
+                2023년 한국과학영재학교 KSA 입학`
+            },
+            '장비': {
+                particle: '는',
+                content: `핸드폰은 삼성 갤럭시 S21을 사용하며,
+                노트북은 삼성 갤럭시 북 flex2을 사용합니다.
+                마우스는 로지텍의 g304를 쓰고,
+                키보드는 앤프로2 체리적축을 사용합니다.
+                통기타는 콜트의 L100C를 사용하고,
+                베이스는 bacchus의 wl4hl AC를 사용합니다.
+                앰프는 펜더의 럼블25를 사용합니다.`
+            },
+            /*'이상형': {
+                particle: '은',
+                content: `웃는게 이쁜 여자를 좋아합니다. 착하고 항상 제 편인 사람이 이상형입니다. 학교 수업 열심히 듣는 사람을 좋아합니다.`
+            },*/
+            'TMI': {
+                particle: '는',
+                content: `영어 이름은 Junee 입니다. 종교는 없습니다.
+                원래 ENTP였는데 코로나 이후로 INTP로 바뀌었습니다.
+                "내가 (설마) ~하겠냐" 라고 하면 부정같지만 사실 긍정의 의미입니다.
+                그리고 다른 사람 앞에서 울지 않습니다.`
+            },
+            '연락처': {
+                particle: '는',
+                content: `카카오톡: <a href="https://open.kakao.com/me/juneekim7" target="_blank">juneekim7</a>
+                디스코드: 준이#0414
+                이메일: juneekim7@gmail.com
+                세컨 폰: 010-4893-4226
+                라인: juneekim7`
+            },
+            'SNS': {
+                particle: '는',
+                content: `인스타그램: <a href="https://www.instagram.com/juneekim7/" target="_blank">juneekim7</a>
+                페이스북: <a href="https://www.facebook.com/profile.php?id=100047797260159" target="_blank">juneekim7</a>
+                젠리: <a href="https://zen.ly/juneekim7" target="_blank">juneekim7</a>
+                유튜브: <a href="https://www.youtube.com/channel/UCpCGz2NJHwGUkYzbrYLKmbw" target="_blank">준이</a>
+                사운드 클라우드: <a href="https://soundcloud.com/juneekim7" target="_blank">juneekim7</a>`
+            },
+            '게임 계정': {
+                particle: '은',
+                content: `롤: 귀여운 준이
+                발로란트: 귀여운 준이
+                포트나이트: 귀여운 준이
+                레인보우 식스: juneekim7
+                로블록스: JUNEEKIM
+                배틀넷: 준이#31959
+                스팀배그: juneekim7
+                모바일배그: 준이ऌ`
+            },
+            '계좌': {
+                particle: '는',
+                content: `우리은행: 1002559046993
+                카카오뱅크: 7777020734464`
+            },
+        }
+        const dataName = [];
+        for(let key in data) {
+            dataName.push(key);
+        }
+        let index = 0;
+    </script>
+    <!--여러 함수-->
+    <script>
+        let select = false;
+        //nav바 표시, tutorial 없앰
+        function selectToggle() {
+            div.tutorial[0].style.display = 'none';
+            div.tutorialArrow.style.display = 'none';
+            if(select == false) {
+                select = true;
+                div.navigation.style.display = 'block';
+                div.selected.style.backgroundColor = '#1c1c1c';
+            }
+            else if(select == true) {
+                select = false;
+                div.navigation.style.display = 'none';
+                div.selected.style.backgroundColor = '#070707';
+            }
+        }
+
+        //nav바 항목 변경
+        function selectChange(n = 0) {
+            if(n < 0 || n >= dataName.length) return false;
+            index = n;
+            const content = ['', '', '', '', ''];
+
+            if(index > 0) {
+                content[0] = '▲';
+                content[1] = dataName[index - 1];
+            }
+            div.selected.textContent = dataName[index];
+            if(index < dataName.length - 1) {
+                content[3] = dataName[index + 1];
+                content[4] = '▼';
+            }
+
+            for(let i = 0; i < 5; i++) {
+                div.select[i].textContent = content[i];
+            }
+        }
+
+        //내용(본문) 표시
+        function show(n = -1) {
+            if(n == -1) {
+                div.tutorial[1].style.display = 'none';
+                div.page.style.display = 'none';
+                div.home.style.display = 'block';
+                selectToggle();
+            }
+            else {
+                selectChange(n);
+                //이 때 index도 바뀜
+                if(select == true) {
+                    select = false;
+                    div.navigation.style.display = 'none';
+                    div.selected.style.backgroundColor = '#070707';
+                }
+                div.home.style.display = 'none';
+                div.page.style.display = 'block';
+                div.title.textContent = dataName[index];
+                div.content.innerHTML = `<div>${data[ dataName[index] ].content.replace(/\n/g, '<br/>')}</div>`;
+                //arrow
+                div.arrow2[0].style.display = index > 0 ? 'block' : 'none';
+                div.arrow2[1].style.display = index + 1 < dataName.length ? 'block' : 'none';
+            }
+        }
+    </script>
+    <!--처음 실행할거-->
+    <script>
+        window.onload = () => {
+            for(let key of divName) {
+                div[key] = document.getElementById(key);
+            }
+            div.tutorialArrow = document.getElementById('tutorial-arrow');
+
+
+            //nav position 맞추기
+            div.navigation.style.left = `${div.selected.getBoundingClientRect().x}px`;
+            if(window.outerWidth >= 426) {
+                //tutorial position 맞추기
+                div.tutorial[0].style.left = `${div.selected.getBoundingClientRect().x}px`;
+                //select top 맞추기
+                div.align.style.top = `calc(${div.selected.getBoundingClientRect().y}px - 18vh * 2)`;
+            }
+            else {
+                //select top 맞추기
+                div.align.style.top = `calc(${div.selected.getBoundingClientRect().y}px - 14vh * 2)`;
+            }
+            //select 기본값
+            selectChange();
+            //main 기본값
+            div.selected.textContent = dataName[index];
+            div.particle.textContent = ` ${data[ dataName[index] ].particle}?`;
+        }
+    </script>
+</head>
+<body>
+    <div id="home" onclick="show(index)">
+        <div id="main">
+            준이의 
+            <div id="selected" onclick="selectToggle(), event.stopPropagation()"></div>
+            <div class="tutorial">클릭하면 바꿀 수 있어요!<span class="pconly"><br/>▼</span></div> <div id="space"></div>
+            <div id="tutorial-arrow"></div>
+            <span id="particle">은?</span>
+        </div>
+        <div id="navigation">
+            <div id="align">
+                <div class="select arrow" onclick="selectChange(index - 1), event.stopPropagation()">▲</div>
+                <div class="select" onclick="show(index - 1), event.stopPropagation()"></div>
+                <div class="select"></div>
+                <div class="select" onclick="show(index + 1), event.stopPropagation()"></div>
+                <div class="select arrow" onclick="selectChange(index + 1), event.stopPropagation()">▼</div>
+            </div>
+        </div>
+    </div>
+    <div id="page">
+        <div id="title" onclick="show(-1)"></div>
+        <div class="tutorial"><span class="pconly">◀ </span>클릭하면 바꿀 수 있어요!</div>
+        <div id="content"></div>
+        <div class="arrow2" onclick="show(index - 1)">&lt;</div>
+        <div class="arrow2" onclick="show(index + 1)">&gt;</div>
+    </div>
+</body>
+</html>

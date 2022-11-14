@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flev.io</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/basic.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/select.js"></script>
+    <script>
+        window.onload = () => {
+            pageChange('main');
+            document.getElementById('name-select').value = typeof localStorage['nickname'] === 'string' ? localStorage['nickname'] : 'name';
+        }
+    </script>
+</head>
+<body>
+    <!--made by Junee, character design by tjdlwo, illustration by yujoo-->
+    <div id="main" class="page">
+        <div class="box">
+            <input type="text" id="name-select" class="main-input" value="guest" maxlength="4" placeholder="nickname"/>
+            <select id="character-select" class="main-input" onclick="characterPreview(true)">
+                <option value="M9">M9</option>
+            </select>
+            <button id="play" class="main-input" onclick="setQueue()">PLAY!</button>
+        </div>
+        <div id="tutorial" onclick="tutorial(true)">tutorial</div>
+
+        <!--choose character-->
+        <div id="character-display">
+            <div id="character-image" onclick="characterSelect()"></div>
+            <div id="description"></div>
+            
+            <div class="left" onclick="changeSelect(-1)">&lt;</div>
+            <div class="right" onclick="changeSelect(1)">&gt;</div>
+        </div>
+        <!--tutorial-->
+        <div id="tutorial-display" onclick="tutorial(false)">
+            <div id="x">X</div>
+            <div id="tutorial-image"></div>
+        </div>
+    </div>
+
+    <div id="game" class="page">
+        <div id="screen">
+            <div id="enemy">
+                <div class="character"></div>
+                <div class="info"><div>NAME<br/><br/>HP: 0<br/>BL: 0/0</div></div>
+            </div>
+            <div id="player">
+                <div class="info"><div>NAME<br/><br/>HP: 0<br/>BL: 0/0</div></div>
+                <div class="character"></div>
+            </div>
+            <div id="score-background"></div>
+            <div id="time-and-score"></div>
+        </div>
+        <!--buttons-->
+        <div id= "skillpad" class="box">
+            <button id="reload" class="skill" onclick="skillSelect('reload')">reload</button>
+            <button id="defend" class="skill" onclick="skillSelect('defend')">defend</button>
+            <button id="fire" class="skill" onclick="skillSelect('fire')">fire</button>
+            <button id="spray" class="skill" onclick="skillSelect('spray')">spray</button>
+            <button id="ultimate" class="skill" onclick="skillSelect('ultimate')"><div>U</div></button>
+        </div>
+    </div>
+
+    <div id="result" class="page">
+        <div class="box">
+            <div id="result-info">victory</div>
+            <button class="main-input" onclick="window.location.reload()">REPLAY</button>
+        </div>
+    </div>
+
+    <div id="loading" class="page">
+        <div id="alert">
+            wait a second..
+        </div>
+    </div>
+</body>
+</html>

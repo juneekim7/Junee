@@ -1,0 +1,395 @@
+<html>
+    <head>
+        <!--WARNING: spagetti code-->
+        <!--준이가 짠거 절대 아님-->
+        <!--효율적으로 만들기 귀찮아서 스파게티 채로 남겨둔 것도 절대 아님-->
+        <!--아무튼 아님-->
+        <!--어쨌든 생축-->
+        <meta charset="utf-8">
+        <title>생축</title>
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #ECF0F1;
+
+                animation: bgc 100000ms ease 0ms;
+            }
+
+            @keyframes bgc {
+                from{background-color: #ECF0F1;}
+                10%{background-color: #ECF0F1;}
+                11%{background-color: #2C3E50;}
+                24%{background-color: #2C3E50;}
+                25%{background-color: #009393;}
+                34%{background-color: #009393;}
+                35%{background-color: #E74C3C;}
+                49%{background-color: #E74C3C;}
+                50%{background-color: slateblue;}
+                59%{background-color: slateblue;}
+                60%{background-color: goldenrod;}
+                69%{background-color: goldenrod;}
+                70%{background-color: goldenrod;}
+                79%{background-color: goldenrod;}
+                80%{background-color: #ECF0F1;}
+            }
+            
+            #object1 {
+                width: 800px;
+                height: 1000px;
+                background-color: #ECF0F1;
+                border-radius: 50px;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+                color: black;
+                text-shadow: none;
+
+                position: relative;
+                left: calc(50vw - 400px);
+                top: calc(50vh - 500px - 100vh);
+
+                animation: anime1 100000ms ease 0ms;
+                z-index: 0;
+            }
+
+            @keyframes anime1 {
+                from{background-color: #3498DB; color: #ECF0F1; font-size: 70px; width: 100px; height: 100px; border-radius: 50px; top: -500px; left: calc(50vw - 50px); color: transparent; text-shadow: none;}
+                0.3%{height: 100px; border-radius: 50px;}
+                1%{height: 30px; top: 70vh; border-radius: 15px;}
+                2%{width: 100px; height: 100px; border-radius: 50px; top: calc(50vh - 50px); left: calc(50vw - 50px);}
+                4%{color: transparent;}
+                5%{width: 600px; left: calc(50vw - 300px); color: #ECF0F1; text-shadow: none;}
+                7%{color: #ECF0F1; text-shadow: 0px 1px 1px #2980B9, 0px 2px 1px #2980B9, 0px 2px 1px #2980B9, 1px 1px 1px #2980B9, 1px 2px 1px #2980B9, 1px 2px 1px #2980B9, 2px 1px 1px #2980B9, 2px 2px 1px #2980B9, 2px 2px 1px #2980B9, 3px 1px 1px #2980B9, 3px 2px 1px #2980B9, 3px 2px 1px #2980B9, 4px 1px 1px #2980B9, 4px 2px 1px #2980B9, 4px 2px 1px #2980B9, 5px 1px 1px #2980B9, 5px 2px 1px #2980B9, 5px 2px 1px #2980B9;}
+                9.9%{color: #ECF0F1; text-shadow: 0px 1px 1px #2980B9, 0px 2px 1px #2980B9, 0px 2px 1px #2980B9, 1px 1px 1px #2980B9, 1px 2px 1px #2980B9, 1px 2px 1px #2980B9, 2px 1px 1px #2980B9, 2px 2px 1px #2980B9, 2px 2px 1px #2980B9, 3px 1px 1px #2980B9, 3px 2px 1px #2980B9, 3px 2px 1px #2980B9, 4px 1px 1px #2980B9, 4px 2px 1px #2980B9, 4px 2px 1px #2980B9, 5px 1px 1px #2980B9, 5px 2px 1px #2980B9, 5px 2px 1px #2980B9;}
+                10%{width: 600px; left: calc(50vw - 300px); background-color: #3498DB; color: transparent; font-size: 70px; height: 100px; top: calc(50vh - 50px); text-shadow: none;}
+                11%{width: 800px; left: calc(50vw - 400px); background-color: #ECF0F1; color: transparent; font-size: 30px; height: 1000px; top: calc(50vh - 500px); text-shadow: none;}
+                11.1%{color: black;}
+                20%{top: calc(50vh - 500px);}
+                25%{top: calc(50vh - 500px - 100vh);}
+                to{background-color: #ECF0F1; font-size: 30px; text-shadow: none;}
+            }
+
+            #object2 {
+                width: 100px;
+                height: 100px;
+                background-color: #ECF0F1;
+                box-shadow: 0px 0px 30px #2C3E50;
+                border-radius: 50px;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+                color: transparent;
+                text-shadow: none;
+
+                position: relative;
+                left: -100vw;/*calc(50vw - 400px)*/;
+                top: calc(-1000px + 50vh - 500px);
+
+                animation: anime2 100000ms ease 0ms;
+                z-index: 1;
+            }
+
+            @keyframes anime2 {
+                from{width: 800px; height: 1000px; top: calc(50vh - 500px + 100vh); left: calc(50vw - 400px); color: transparent; box-shadow: none;}
+                15%{color: transparent;}
+                20%{top: calc(50vh - 500px + 100vh); color: black; box-shadow: none;}
+                25%{top: calc(-1000px + 50vh - 500px); color: black; box-shadow: 0px 0px 30px #2C3E50;}
+                35%{width: 800px; height: 1000px; top: calc(-1000px + 50vh - 500px); left: calc(50vw - 400px); color: black; box-shadow: 0px 0px 30px #2C3E50;}
+                35.1%{color: transparent;}
+                38%{background-color: #ECF0F1; color: #ECF0F1; font-size: 70px; width: 100px; height: 100px; left: calc(50vw - 400px); border-radius: 50px; color: transparent; text-shadow: none;}
+                38.1%{top: calc(-1000px + 50vh - 500px);}
+                41%{top: -150vh;}
+            }
+
+            #object3 {
+                width: 800px;
+                height: 1000px;
+                background-color: #ECF0F1;
+                box-shadow: 0px 0px 30px #2C3E50;
+                border-radius: 50px;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+                color: black;
+                text-shadow: none;
+
+                position: relative;
+                left: -100vw/*calc(50vw - 400px)*/;
+                top: calc(-1000px + 50vh - 603px);;
+
+                animation: anime3 100000ms ease 0ms;
+                z-index: 1;
+            }
+
+            @keyframes anime3 {
+                from{top: 0; left: -100vw; background-color: #ECF0F1; color: transparent; font-size: 70px; width: 100px; height: 100px; border-radius: 50px; color: transparent; text-shadow: none;}
+                37%{top: calc(-1000px + 100vh);}
+                39.5%{top: calc(-1000px + 50vh - 603px); left: calc(50vw - 400px); background-color: #ECF0F1; color: transparent; font-size: 70px; width: 100px; height: 100px; border-radius: 50px; color: transparent; text-shadow: none;}
+                39.9%{color: transparent;}
+                40%{top: calc(-1000px + 50vh - 603px); left: calc(50vw - 400px); width: 800px; height: 1000px; box-shadow: 0px 0px 30px #2C3E50; color: black;}
+                49%{top: calc(-1000px + 50vh - 603px); left: calc(50vw - 400px); width: 800px; height: 1000px; box-shadow: 0px 0px 30px #2C3E50; color: black;}
+                50%{left: -100vw;}
+                to{left: -100vw;}
+            }
+
+            #object6 {
+                width: 800px;
+                height: 1000px;
+                background-color: #ECF0F1;
+                box-shadow: 0px 0px 30px #2C3E50;
+                border-radius: 50px;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+                color: black;
+                text-shadow: none;
+
+                position: fixed;
+                left: -100vw/*calc(50vw - 400px)*/;
+                top: calc(-1000px + 50vh - 603px);;
+
+                animation: anime6 100000ms ease 0ms;
+                z-index: 1;
+            }
+
+            @keyframes anime6 {
+                from{top: -100vh; left: calc(50vw - 400px); background-color: #ECF0F1; color: transparent; font-size: 70px; width: 100px; height: 100px; border-radius: 50px; color: transparent; text-shadow: none;}
+                49%{top: -100vh; left: calc(50vw - 400px); background-color: #ECF0F1; color: transparent; font-size: 70px; width: 100px; height: 100px; border-radius: 50px; color: transparent; text-shadow: none;}
+                51.9%{color: transparent;}
+                52%{top: calc(50vh - 500px); left: calc(50vw - 400px); width: 800px; height: 1000px; box-shadow: 0px 0px 30px #2C3E50; color: black;}
+                59%{top: calc(50vh - 500px); left: calc(50vw - 400px); width: 800px; height: 1000px; box-shadow: 0px 0px 30px #2C3E50; color: black;}
+                60%{left: calc(100vw + 100px);}
+                to{left: calc(100vw + 100px);}
+            }
+
+            #object7 {
+                width: 800px;
+                height: 2100px;
+                background-color: #ECF0F1;
+                box-shadow: 0px 0px 30px #2C3E50;
+                border-radius: 50px;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+                color: black;
+                text-shadow: none;
+
+                position: fixed;
+                left: calc(50vw - 400);
+                top: calc(100vh + 100px);;
+
+                animation: anime7 100000ms linear 0ms;
+                z-index: 1;
+            }
+
+            @keyframes anime7 {
+                57%{top: calc(100vh + 100px); left: calc(50vw - 400px); width: 800px; height: 1500px; box-shadow: 0px 0px 30px #2C3E50; color: black;}
+                80%{top: -1600px; left: calc(50vw - 400px); width: 800px; height: 1500px; box-shadow: 0px 0px 30px #2C3E50; color: black;}
+            }
+
+            #object4 {
+                font-size: 200px;
+                text-align: center;
+                font-weight: bold;
+                color: #2C3E50;
+
+                position: relative;
+                top: calc(50vh - 130px);
+
+                animation: anime4 5s ease 0ms;
+            }
+
+            #object5 {
+                font-size: 25px;
+                text-align: center;
+                font-weight: bold;
+                color: #2C3E50;
+
+                position: relative;
+                top: calc(50vh - 130px);
+
+                animation: anime4 5s ease 0ms;
+            }
+
+            @keyframes anime4 {
+                from{opacity: 0;}
+                to{opacity: 1;}
+            }
+
+            #hidden {
+                opacity: 0;
+            }
+
+            .to{font-size: 30px; text-align: left; padding: 50px 30px;}
+            .letter{font-size: 35px; text-align: left; line-height: 60px; margin: 70px 170px 70px 170px;}
+            .from{font-size: 30px; text-align: right; margin: 0 30 50px 0px;}
+
+            .balls {
+                width: 103px;
+                height: 103px;
+                border-radius: 150px;
+                background-color: orange;
+                box-shadow: 0px 0px 30px #2C3E50;
+                color: white;
+                font-size: 80px;
+                text-align: center;
+                position: relative;
+                top: -4000px; left: 0;
+                display: inline-block;
+                animation: none;
+                z-index: 3;
+            }
+
+            @keyframes banime1 {
+                from{top: 100vh;}
+                15%{top: 100vh;}
+                23%{top: -2320px;}
+            }
+
+            @keyframes banime2 {
+                from{top: calc(100vh + 20px);}
+                15%{top: calc(100vh + 20px);}
+                23%{top: -2300px;}
+            }
+        </style>
+        <script>
+            setTimeout(function() {
+                let t="to.김현우";
+                let c="";
+                let i=0;
+                let j=0;
+                let k=100;
+                let w1=setInterval(function() {
+                    c+=t[i];
+                    document.getElementById("object1").textContent=c;
+                    k=100;
+                    i++;
+                    if(i==t.length) clearInterval(w1);
+                },k);
+            },7000);
+
+            setTimeout(function() {
+                document.getElementById("object1").innerHTML=document.getElementById("hidden").innerHTML;
+                window.scrollTo(0,1);
+            },11000);
+
+            setTimeout(function() {
+                document.body.innerHTML='<div id="object4">9/13</div><div id="object5">당신의 생일을 진심으로 축하합니다.</div>';
+                window.scrollTo(0,1);
+            },80000);
+
+            window.onload=function() {
+                let color=["#E74C3C","#3498DB","#009393"];
+                let AA=["banime1 100000ms ease 0ms","banime2 100000ms ease 0ms"];
+                for(let i=0;i<document.getElementsByClassName("balls").length;i++) {
+                    document.getElementsByClassName("balls").item(i).style.backgroundColor=color[Math.floor(Math.random()*color.length)];
+                    document.getElementsByClassName("balls").item(i).style.animation=AA[i%2];
+                    document.getElementsByClassName("balls").item(i).style.left="calc(calc(50vw - 405px) + "+(i*-20)+"px)";
+                }
+                window.scrollTo(0,1);
+            }
+        </script>
+    </head>
+    <body>
+        <iframe width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/715312945&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <div id="object1">생일축하해</div>
+        <div id="object2">
+            <div class="to">to.현우</div>
+            <div class="letter">
+                &nbsp;&nbsp;현우야<br/>
+                생일 진심으로 축하해🥳<br/>
+                생일인데 가족들과<br/>
+                즐거운 시간보내고<br/>
+                맛있는거 많이 먹어 ㅎㅎ<br/>
+                만약 힘들일이 있으면<br/>
+                우리한테 말해!!<br/>
+                다들어 줄겡🙂<br/>
+                그럼 다시 한번 생일 축하고<br/>
+                오늘 하루 즐겁게 보내 🥳<br/><br/>
+            </div>
+            <div class="from">from.아잉</div>
+        </div>
+        <div id="object3">
+            <div class="to">to.현우</div>
+            <div class="letter">
+                &nbsp;&nbsp;🎉생일축하 하고ㅎㅎ<br/>
+                현우야 진정한15살이 되셨네<br/>
+                생일 축하 하고<br/>
+                맛있는거 많이 먹고 ~ ~ ~<br/>
+                더더욱 친해지자!!<br/>
+                알긋지?<br/>
+                진심으로 생일 축하해~~~<br/>
+                지금보다 더<br/>
+                활동 열심히 할게!!🎉<br/><br/>
+            </div>
+            <div class="from">from.하루</div>
+        </div>
+        <div id="object6">
+            <div class="to">to.현우오빠</div>
+            <div class="letter">
+                &nbsp;&nbsp;안녕 현우오빠 나 한예야<br/>
+                생일 너무너무 축하해!<br/>
+                맛있는거 많이 먹고<br/>
+                오늘 좋은하루 보내!<br/>
+                그럼 마지막으로?!<br/>
+                월요일에 학교에서 만나면<br/>
+                생일빵 기대해 ㅎㅎㅎ<br/>
+                생축!!<br/>
+                🥳<br/><br/>
+            </div>
+            <div class="from">from.한예</div>
+        </div>
+        <div id="object7">
+            <div class="to">to.현우 오빠</div>
+            <div class="letter">
+                &nbsp;&nbsp;현우 오빠가 나한테<br/>
+                먼저 갠으로<br/>
+                오빠 옾챗 들어와서<br/>
+                친해지자 했을 때<br/>
+                너무 고마웠어🥺<br/>
+                그래서 옾챗을<br/>
+                들어오게 됐는데<br/>
+                친절하게 대해주고<br/>
+                이쁜 말만 해줘서<br/>
+                너무 고마워<br/>
+                생일 축하하구<br/>
+                보고 싶은거<br/>
+                먹고 싶은거<br/>
+                하고 싶은 거<br/>
+                다 하고 행복하게 보내!!!!<br/>
+                현우 오빠 생일 축하해🥳🥳<br/>
+            </div>
+            <div class="from">from.체리</div>
+        </div>
+        <div id="ballbox"></div>
+            <div class="balls">생</div>
+            <div class="balls">일</div>
+            <div class="balls">축</div>
+            <div class="balls">하</div>
+            <div class="balls">합</div>
+            <div class="balls">니</div>
+            <div class="balls">다</div>
+            <div class="balls">!</div>
+            <div class="balls">!</div>
+        </div>
+        <div id="hidden">
+            <div class="to">to.현우 형</div>
+            <div class="letter">
+                &nbsp;&nbsp;ㅎ2~<br/>
+                형! 생일 축하해!<br/>
+                생일인 만큼<br/>
+                오늘 행복한 하루 보내고,<br/>
+                비록 만난지는 얼마 안됐지만<br/>
+                앞으로 더 친해져보자!<br/>
+                화이팅!<br/>
+                생일축하해!<br/>
+                🎉🎉🎉🎉🎉<br/><br/>
+            </div>
+            <div class="from">from.준이</div>
+        </div>
+    </body>
+</html>

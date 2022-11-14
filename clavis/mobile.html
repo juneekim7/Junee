@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>clavis - 키보드 리듬게임</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://w.soundcloud.com/player/api.js"></script>
+        <script>
+            function checkDevice() {
+                let filter="win16|win32|win64|macintel|mac|";
+                if(filter.indexOf(navigator.platform.toLowerCase())<0) {
+                    alert("현재 clavis는 모바일 기기를 지원하지 않습니다.");
+                }
+                else {
+                    location.href="clavis.html";
+                }
+            }
+            window.onload=function() {
+                checkDevice();
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

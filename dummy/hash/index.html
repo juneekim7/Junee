@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hash</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="data/blockdata.js"></script>
+    <script type="text/javascript" src="js/blockcode.js"></script>
+    <script type="text/javascript" src="js/debug.js"></script>
+    <script type="text/javascript" src="js/start.js"></script>
+</head>
+<body>
+    <div id="header">
+        <font style="padding-left: 20px; line-height: 50px; color: white; font-size: 40px; font-family: 'Dancing Script', cursive; font-weight: 700;">h@sh</font>
+        <div id="save-code" onclick="saveCode()">저장</div>
+    </div>
+    <div id="contents">
+        <div id="debug">
+            <div id="chat"></div>
+            <div id="Dinput-box">
+                <textarea id="Dinput" onkeyup="debugEnter(event)"></textarea>
+                <button id="Dsend" onclick="debug()">전송</button>
+            </div>
+        </div>
+        <div id="blocks">
+            <div class="block" id="hi" draggable="true" ondragstart="setId(event)"></div>
+        </div>
+        <div id="codes" ondrop="drop(event)" ondragover="prevent(event)"></div>
+    </div>
+</body>
+</html>

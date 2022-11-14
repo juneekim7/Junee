@@ -1,0 +1,359 @@
+<html>
+    <head>
+        <style>
+            .struc1 {
+                width: 660px;
+                height: 75px;
+                background-color: rgb(52, 52, 52);
+                position: absolute;
+                left: 390px; top: 180px;
+                z-index: 25;
+            }
+
+            .struc2 {
+                width: 90px;
+                background-color: transparent;
+                border-left: 90px solid transparent;
+                border-top: 400px solid rgb(52, 52, 52);
+                position: absolute;
+                left: 810px; top: 180px;
+                z-index: 25;
+            }
+
+            .struc3 {
+                width: 100px;
+                background-color: transparent;
+                border-right: 90px solid transparent;
+                border-bottom: 400px solid rgb(52, 52, 52);
+                position: absolute;
+                left: 935px; top: 180px;
+                z-index: 25;
+            }
+
+            .struc4 {
+                width: 215px;
+                height: 100px;
+                background-color: rgb(52, 52, 52);
+                border-radius: 0 0 25px 25px;
+                border-left: 55px solid rgb(52, 52, 52);
+                border-bottom: 30px solid rgb(52, 52, 52);
+                position: absolute; 
+                left: 620px; top: 255px;
+                z-index: 25;
+            }
+
+            .struc4:before {
+                width: 190px;
+                height: 100px;
+                background-color: white;
+                border-radius: 25px;
+                position: absolute;
+                left: -25px;
+                content: "";
+            }
+
+            .struc5 {
+                border-top: 50px solid transparent;
+                border-bottom: 150px solid transparent;
+                border-left: 60px solid rgb(52, 52, 52);
+                position:absolute;
+                left: 1045px; top: 180px;
+                z-index: 25;
+            }
+
+            .struc6 {
+                width: 215px;
+                height: 140;
+                background-color: white;
+                border-radius: 70px 0 0 35px;
+                position: absolute;
+                left: 1060px; top: 200px;
+                z-index: 26;
+            }
+
+            .slide {
+                width: 850px;
+                height: 110px;
+                background-color: silver;
+                border-radius: 0 10px 0 0;
+                position: absolute;
+                left: 200px; top: 70px;
+                z-index: 20;
+            }
+
+            .slide:before{
+                width: 50px;
+                background-color: transparent;
+                border-right: 200px solid transparent;
+                border-bottom: 185px solid silver;
+                border-radius: 0 0 0 10px;
+                position: absolute;
+                left: 0; top: -20px;
+                z-index: 20;
+                content: "";
+            }
+
+            .slide:after{
+                width: 125px;
+                height: 50px;
+                background-color: rgb(52, 52, 52);
+                border-radius: 20px 20px 0 0;
+                position: absolute;
+                left: 700px; top: -50px;
+                z-index: 15;
+                content: "";
+            }
+
+            .barrel {
+                width: 500px;
+                height: 70px;
+                background-color: rgb(52, 52, 52);
+                border-radius: 5px;
+                position: absolute;
+                left: 175px; top: 100px;
+                z-index: 15;
+            }
+
+            .trigger {
+                background-color: transparent;
+                border-left: 50px solid rgb(52, 52, 52);
+                border-top: 50px solid rgb(52, 52, 52);
+                border-right: 50px solid transparent;
+                border-bottom: 50px solid transparent;
+                position: absolute;
+                left: 1025px; top: 100px;
+                z-index: 15;
+            }
+
+            .trigger2 {
+                width: 10px;
+                height: 100px;
+                background-color: transparent;
+                border-bottom: 20px solid rgb(52, 52, 52);
+                border-right: 30px solid rgb(52, 52, 52);
+                border-radius: 0 0 10px 0;
+                position: absolute;
+                left: 720px; top: 225px;
+                z-index: 25;
+            }
+
+            .grab {
+                width: 50px;
+                background-color: transparent;
+                border-left: 80px solid transparent;
+                border-top: 340px solid silver;
+                position: absolute;
+                left: 845px; top: 210px;
+                z-index: 35;
+            }
+
+            .grab2 {
+                width: 50px;
+                background-color: transparent;
+                border-right: 80px solid transparent;
+                border-bottom: 340px solid silver;
+                position: absolute;
+                left: 955px; top: 210px;
+                z-index: 35;
+            }
+
+            .bullet {
+                border-top: 30px solid transparent;
+                border-bottom: 30px solid transparent;
+                border-right: 60px solid gold;
+                position: absolute;
+                left: -80px; top: 105px;
+                z-index: 10;
+            }
+
+            .BN {
+                width: 100px;
+                height: 50px;
+                background-color: silver;
+                border-radius: 20px;
+                text-align: center;
+                position: absolute;
+                left: 175px; top: 500px;
+                font-size: 35px;
+            }
+
+        </style>
+        <title>권총</title>
+        <script>
+                var Trigger=document.getElementsByClassName('trigger');
+                var Slide=document.getElementsByClassName('slide');
+                var Trigger2=document.getElementsByClassName('trigger2');
+                var Bullet=document.getElementsByClassName('bullet');
+                var bn=document.getElementsByClassName('BN');
+                var B=0;
+                var i;
+                var j;
+                var k;
+                var l;
+                var m;
+                function reload()
+                {
+                    for(i=0; i<Trigger.length; i++)
+                    {
+                        for(j=0; j<Slide.length; j++)
+                        {
+                            for(k=0; k<Trigger2.length; k++)
+                            {
+                                for(l=0; l<Bullet.length; l++)
+                                {
+                                    for(m=0; m<bn.length; m++)
+                                    {
+                                        Trigger[i].style.transform='rotate(45deg)';
+                                        Trigger[i].style.transformOrigin='0% 100%';
+                                        Slide[j].style.MsTransitionDuration='0.5s';
+                                        Slide[j].style.MozTtransitionDuration='0.5s';
+                                        Slide[j].style.OTransitionDuration='0.5s';
+                                        Slide[j].style.WebkitTransitionDuration='0.5s';
+                                        Slide[j].style.transitionDuration='0.5s';
+                                        Slide[j].style.left='300px';
+                                        Trigger2[k].style.transform='rotate(0deg)';
+                                        Trigger2[k].style.transformOrigin='50% 0%';
+                                        Bullet[l].style.left='200px';
+                                        Bullet[l].style.transitionDuration='0s'
+                                        if(B==7)
+                                        {
+                                            B=0;
+                                        }
+                                        else if(B==0)
+                                        {
+                                            B=0;
+                                        }
+                                        else if(B<7)
+                                        {
+                                            B=-1;
+                                        }
+                                        bn[m].textContent='7/'+(7-B);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function reloaded()
+                {
+                    for(i=0; i<Trigger.length; i++)
+                    {
+                        for(j=0; j<Slide.length; j++)
+                        {
+                            for(k=0; k<Trigger2.length; k++)
+                            {
+                                Slide[j].style.MsTransitionDuration='0.5s';
+                                Slide[j].style.MozTtransitionDuration='0.5s';
+                                Slide[j].style.OTransitionDuration='0.5s';
+                                Slide[j].style.WebkitTransitionDuration='0.5s';
+                                Slide[j].style.transitionDuration='0.5s';
+                                Slide[j].style.left='200px';
+                            }
+                        }
+                    }
+                }
+
+                function semi_reload()
+                {
+                    for(i=0; i<Trigger.length; i++)
+                    {
+                        for(j=0; j<Slide.length; j++)
+                        {
+                            for(k=0; k<Trigger2.length; k++)
+                            {
+                                for(l=0; l<Bullet.length; l++)
+                                {
+                                    Trigger[i].style.transform='rotate(45deg)';
+                                    Trigger[i].style.transformOrigin='0% 100%';
+                                    Slide[j].style.MsTransitionDuration='0.1s';
+                                    Slide[j].style.MozTtransitionDuration='0.1s';
+                                    Slide[j].style.OTransitionDuration='0.1s';
+                                    Slide[j].style.WebkitTransitionDuration='0.1s';
+                                    Slide[j].style.transitionDuration='0.1';
+                                    Slide[j].style.left='300px';
+                                    Trigger2[k].style.transform='rotate(0deg)';
+                                    Trigger2[k].style.transformOrigin='50% 0%';
+                                    Bullet[l].style.left='200px';
+                                    Bullet[l].style.transitionDuration='0s'
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function fire()
+                {
+                    for(i=0; i<Trigger.length; i++)
+                    {
+                        for(j=0; j<Slide.length; j++)
+                        {
+                            for(k=0; k<Trigger2.length; k++)
+                            {
+                                for(l=0; l<Bullet.length; l++)
+                                {
+                                    for(m=0; m<bn.length; m++)
+                                    {
+                                        Trigger[i].style.transform='rotate(0deg)';
+                                        Trigger[i].style.transformOrigin='0% 100%';
+                                        Trigger2[k].style.transform='rotate(-10deg)';
+                                        Trigger2[k].style.transformOrigin='50% 0%';
+                                        Bullet[l].style.left='-70px';
+                                        Bullet[l].style.transitionDuration='0.1s';
+                                        B++;
+                                        bn[m].textContent='7/'+ (7-B);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function semi_auto()
+                {
+                    for(i=0; i<Trigger.length; i++)
+                    {
+                        if(Trigger[i].style.transform=='rotate(45deg)')
+                        {
+                            semi_reload();
+                            fire();
+                        }
+                    }
+                }
+
+                function semi_reloaded()
+                {
+                    reloaded()
+                    for(i=0; i<Trigger.length; i++)
+                    {
+                        for(l=0; l<Bullet.length; l++)
+                        {
+                            if(Bullet[l].style.left=='-70px'&&B<7)
+                            {
+                                Bullet[l].style.left='200px';
+                                Bullet[l].style.transitionDuration='0s';
+                                Trigger[i].style.transform='rotate(45deg)';
+                                Trigger[i].style.transformOrigin='0% 100%';
+                            }
+                        }
+                    }
+                }
+        </script>
+    </head>
+    <body>
+        <div class="struc1"></div>
+        <div class="struc2"></div>
+        <div class="struc3"></div>
+        <div class="struc4"></div>
+        <div class="struc5"></div>
+        <div class="struc6"></div>
+        <div class="slide" onmousedown='reload()' onmouseup='reloaded()'></div>
+        <div class="barrel"></div>
+        <div class="trigger"></div>
+        <div class="trigger2" onmousedown='semi_auto()' onmouseup='semi_reloaded()'></div>
+        <div class="bullet"></div>
+        <div class="BN">7/0</div>
+        <div class="grab"></div>
+        <div class="grab2"></div>
+    </body>
+</html>

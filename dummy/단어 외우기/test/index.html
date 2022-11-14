@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src="../info.js"></script>
+        <script src="JS/main.js" charset="utf-8"></script>
+        <title></title>
+    </head>
+    <body onkeyup="enter()">
+        <div id="bullet">
+            <form id="basicInfo" action="../test/index.html" method="POST">
+                <span id="out" style="color: lightseagreen;">영어 단어:</span>
+                <input id="OUTPUT" type="text" value="" disabled/>
+                <br/>
+                <span id="in" style="color: lightseagreen;">한국어 뜻:</span>
+                <input id="INPUT" type="text" value="" autocomplete="off" onkeyup=""/>
+
+                <input id="hint" type="button" value="힌트보기" onclick="seeHint()" style="width: 20%;"/>
+
+                <input id="next" type="button" value="다음" onclick="goNext()"/>
+            </form>
+        </div>
+
+        <div id="hintbox">
+            <!--<input id="hint" type="button" value="힌트보기" onclick="seeHint()"/>-->
+            <span style="color: grey; margin-left: 5%;">영-한 힌트:</span>
+            <input id="HintText" type="text" value="?" disabled/>
+            <br/>
+        </div>
+
+        <div id="white"></div>
+        <div id="pistol"></div>
+        <div id="slide"></div>
+        <div id="struct1"></div>
+        <div id="struct2"></div>
+        <div id="magazine"></div>
+    </body>
+</html>

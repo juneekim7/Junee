@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css"/>
+    <title>YERIM</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #write {
+            width: 45vw;
+            height: 100vh;
+            float: left;
+        }
+
+        #run {
+            width: 100px;
+            height: 50px;
+            margin: 10px;
+            background-color: mediumslateblue;
+            border-right: 3px solid slateblue;
+            border-bottom: 3px solid slateblue;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+
+            position: fixed;
+            right: 0%;
+            bottom: 0;
+        }
+        #run:hover {
+            border: none;
+            border-left: 3px solid slateblue;
+            border-top: 3px solid slateblue;
+            cursor: pointer;
+        }
+
+        #screen {
+            width: 55vw;
+            height: 100vh;
+            background-color: white;
+            border-left: 2px solid black;
+            box-sizing: border-box;
+            float: left;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
+    <script src="compile.js"></script>
+    <script>
+        let editor;
+
+        function _compileCode() {
+            let piece=editor.getValue();
+            document.getElementById("screen").innerHTML=`
+                <div id="print" style="position: fixed;"></div>
+                <div id="shape" style="position: fixed;"></div>
+            `;
+            localStorage["code"]=piece;
+            piece=compile(piece);
+            eval(piece);
+        }
+
+        require.config({ paths: { "vs": 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs' }});
+        require(['vs/editor/editor.main'], function() {
+            // Register yerim
+            monaco.languages.register({ id: "yerim" });
+
+            // Register a tokens provider for yerim
+            monaco.languages.setMonarchTokensProvider("yerim", {
+                tokenizer: {
+                    root: [
+                        [/\/\/.*/,"comment"],
+
+                        [/if/, "declaration"],
+                        [/while/, "declaration"],
+                        [/set/, "declaration"],
+                        [/func/, "declaration"],
+
+                        [/만약/, "declaration"],
+                        [/반복/, "declaration"],
+                        [/변수/, "declaration"],
+                        [/함수/, "declaration"],
+                    ]
+                }
+            });
+
+            // Register a completion item provider for the yerim
+            monaco.languages.registerCompletionItemProvider("yerim", {
+                provideCompletionItems: () => {
+                    let suggestions = [
+
+                        //ENG
+
+                        {
+                            label: "empty string",
+                            kind: monaco.languages.CompletionItemKind.Snippet,
+                            insertText: '"${0:}"',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "set",
+                            kind: monaco.languages.CompletionItemKind.Keyword,
+                            documentation: "Makes a variable.",
+                            insertText: 'set ',
+                        },
+                        {
+                            label: "func",
+                            kind: monaco.languages.CompletionItemKind.Keyword,
+                            documentation: "Makes a function.",
+                            insertText: 'func ',
+                        },
+                        {
+                            label: "while",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Repeats if the condition is true.",
+                            insertText: 'while(${0:condition}) {\n\t${1:repeats if the condition is true}\n}',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "locate",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Returns location as an object.",
+                            insertText: 'locate(${0:x,y,position})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "position",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Returns location as an object (same as locate()).",
+                            insertText: 'position(${0:x,y,position})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "font",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Returns font as an object.",
+                            insertText: 'font(${0:color,fontSize,textAlign,lineHeight})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "direction",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Returns direction as an object.",
+                            insertText: 'direction(${0:top,right,bottom,left})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "shape",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Returns shape(css styles) as an object.",
+                            insertText: 'shape(${0:width,height,backgroundColor,border(),borderRadius()})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "border",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Returns border(css styles) as an object.",
+                            insertText: 'border(${0:widthTop,colorTop,widthRight,colorRight,widthBottom,colorBottom,widthLeft,colorLeft})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "borderRadius",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Returns borderRadius(css styles) as an object.",
+                            insertText: 'borderRadius(${0:leftTop,rightTop,rightBottom,leftBottom})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "print",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            detail: "func print(_value?: any, _font?: font(), _pos?: locate()): string",
+                            documentation: "Prints letters on the screen.",
+                            insertText: 'print(${0:value,font(),locate()})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "rect",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            detail: "func rect(_shape?: shape(), _pos?: locate()): void",
+                            documentation: "Makes a rectangle on the screen.",
+                            insertText: 'rect(${0:shape(),locate()})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        
+                        //ENG
+
+                        {
+                            label: "빈 문자열",
+                            kind: monaco.languages.CompletionItemKind.Snippet,
+                            insertText: '"${0:}"',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "변수",
+                            kind: monaco.languages.CompletionItemKind.Keyword,
+                            documentation: "변수를 만듭니다.",
+                            insertText: '변수 ',
+                        },
+                        {
+                            label: "함수",
+                            kind: monaco.languages.CompletionItemKind.Keyword,
+                            documentation: "함수를 만듭니다.",
+                            insertText: '함수 ',
+                        },
+                        /*{
+                            label: "while",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "Repeats if the condition is true",
+                            insertText: 'while(${0:condition}) {\n\t${1:repeats if the condition is true}\n}',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },*/
+                        {
+                            label: "위치",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "위치를 객체로 반환합니다.",
+                            insertText: '위치(${0:x,y,포지션})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "폰트",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "폰트를 객체로 반환합니다.",
+                            insertText: '폰트(${0:색,크기,맞춤,줄 크기})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "방향",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "방향을 객체로 반환합니다.",
+                            insertText: '방향(${0:위,오른쪽,아래,왼쪽})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "모양",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "모양(css style)을 객체로 반환합니다.",
+                            insertText: '모양(${0:너비,높이,배경색,테두리(),둥근모서리()})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "테두리",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "테두리(css style)을 객체로 반환합니다.",
+                            insertText: '테두리(${0:너비위쪽,색위쪽,너비오른쪽,색오른쪽,너비아래쪽,색아래쪽,너비왼쪽,색왼쪽})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "둥근모서리",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            documentation: "둥근 모서리(css styles)를 객체로 반환합니다.",
+                            insertText: '둥근모서리(${0:왼쪽위,오른쪽위,오른쪽아래,왼쪽아래})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "프린트",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            detail: "func 프린트(_value?: any, _font?: 폰트(), _pos?: 위치()): 문자열",
+                            documentation: "값을 화면에 출력합니다.",
+                            insertText: '프린트(${0:값,폰트(),위치()})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                        {
+                            label: "네모",
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            detail: "func 네모(_shape?: 모양(), _pos?: 위치()): void",
+                            documentation: "화면에 직사각형을 그립니다.",
+                            insertText: '네모(${0:모양(),위치()})',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        },
+                    ];
+                    return {suggestions: suggestions};
+                }
+            });
+
+            //auto close
+            monaco.languages.setLanguageConfiguration("yerim", {
+                brackets:[['{','}'],['[',']']],
+                autoClosingPairs:[
+                    { open:'{', close:'}', notIn:["string"], },
+                    { open:'[', close:']', notIn:["string"], },
+                    { open:'"', close:'"', notIn:["string"], },
+                    { open:'(', close:')', notIn:["string"], },
+                    { open:'/*', close:'*/', notIn:["string"], },
+                ]
+            });
+
+            //yerim editor
+            monaco.editor.defineTheme("yeditor", {
+                base: "vs",
+                inherit: false,
+                rules: [
+                    { token: "string", foreground: 'A31515', },
+                    { token: "comment", foreground: '428418', },
+                    { token: "declaration", foreground: '683DAB', fontStyle: 'bold'}
+                ]
+            });
+
+            editor = monaco.editor.create(document.getElementById('write'), {
+                theme: "yeditor",
+                language: "yerim",
+                fontFamily: "Nanum Gothic Coding",
+                automaticLayout: true,
+                value: localStorage["code"],
+            });
+        });
+
+        function _start() {
+            if(localStorage["code"]==undefined) localStorage["code"]="";
+        }
+
+        window.onload=function() {
+            start();
+        }
+    </script>
+</head>
+<body>
+    <div id="write"></div>
+    <div id="screen">
+        <div id="print" style="position: fixed;"></div>
+        <div id="shape" style="position: fixed;"></div>
+    </div>
+    <div id="run" onclick="_compileCode()">실행</div>
+</body>
+</html>

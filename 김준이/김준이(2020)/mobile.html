@@ -1,0 +1,313 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--, user-scalable=no">-->
+        <meta name="keywords" content="김준이, 준이">
+        <meta name="description" content="안녕하세요! 준이의 홈페이지입니다!">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Sunflower:wght@300&display=swap');
+            /*lightsteelblue lightseagreen whitesmoke gainsboro*/
+            body {
+                background: ghostwhite;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+                font-family: "Nanum Gothic", sans-serif;
+            }
+            h1 {
+                font-size: 25px;
+                font-weight: normal;
+                line-height: 120px;
+                color: lightseagreen;
+                font-family: "Nanum Gothic", sans-serif;
+                margin: 0;
+            }
+            a{
+                color: lightsteelblue;
+            }
+            a:hover {
+                font-weight: bold;
+            }
+            
+            #nav {
+                width: 100vw;
+                height: 70px;
+                background-color: #353535;
+                border-top: 2px solid #535353;
+                box-sizing: border-box;
+                position: fixed;
+                /*top: calc(100vh - 70px);*/
+                bottom: 0;
+                -webkit-tap-highlight-color: transparent;
+                z-index: 1;
+            }
+            #nav:focus {
+                outline: none;
+            }
+            #linkbox {
+                width: 100vw;
+                height: 68px;
+                margin: 0 auto;
+                text-align: center;
+                line-height: 68px;
+                font-family: "Nanum Gothic", sans-serif;
+                cursor: pointer;
+                display: flex;
+            }
+            #now {
+                width: calc(100vw / 4);
+                color: white;
+                font-size: 13px;
+                font-family: "Nanum Gothic", sans-serif;
+            }
+            .link {
+                width: calc(100vw / 4);
+                color: grey;
+                font-size: 13px;
+            }
+
+            #contents {
+                width: 100vw;
+                background-color: snow;
+                box-sizing: border-box;
+                font-family: "Sunflower", sans-serif;
+                z-index: 0;
+            }
+            .intro {
+                width: 100vw;
+                padding-top: 50px;
+                padding-bottom: 100px;
+                font-size: 12px;
+                line-height: 25px;
+                text-align: center;
+            }
+            #contents-footer {
+                padding-bottom: calc(100vh - 50vw - 70px);
+            }
+            @keyframes start1 {
+                from{width: 0%;}
+                to{width: 100%;}
+            }
+            @keyframes start2 {
+                from{height: 0%; opacity: 0;}
+                50%{opacity: 1;}
+                to{height: 100%;}
+            }
+            @keyframes opac {
+                from{opacity: 0;}
+                to{opacity: 1;}
+            }
+
+            .imgdis {
+                width: 100vw;
+                height: 50vw;
+                display: flex;
+            }
+
+            /*page1*/
+            #face {
+                width: 45vw;
+                height: 45vw;
+                background-image: url("https://i.imgur.com/IVfUpAR.jpg");
+                background-size: 45vw;
+                border-radius: 10px;
+                margin: 2.5vw;
+            }
+            #prodis {
+                width: 50vw;
+                height: 50vw;
+                padding-top: calc((50vw - 100px) / 2);
+                font-size: 15px;
+                line-height: 25px;
+                text-align: center;
+            }
+
+            /*page3*/
+            .snsimg {
+                width: 45vw;
+                height: 45vw;
+                background-size: 45vw;
+                margin: 2.5vw;
+            }
+            .snsdis {
+                width: 50vw;
+                height: 50vw;
+                padding-top: calc((35vw - 45px) / 2);
+                font-size: 15px;
+                line-height: 25px;
+                text-align: center;
+            }
+
+            /*page4*/
+            #cs {
+                width: 100vw;
+                height: 100vh;
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 100vh;
+                text-align: center;
+                animation: animeCS 1s ease;
+            }
+            @keyframes animeCS {
+                from{opacity: 0;}
+                to{opacity: 1;}
+            }
+        </style>
+        <script>
+            function pageChange(x) {
+                //nav 수정
+                for(let i=0;i<4;i++) {
+                    document.getElementsByClassName("link").item(i).id="";
+                }
+                document.getElementsByName("nav"+x).item(0).id="now";
+                //pg이동
+                for(let i=1;i<=4;i++) {
+                    document.getElementById("page"+i).style.display="none";
+                }
+                document.getElementById("page"+x).style.display="block";
+                window.scrollTo(0, 0);
+                if(i==1||i==2) changeAge();
+            }
+
+            function changeAge() {
+                let age=document.getElementById("age");
+                let aa=new Date();
+                let year=aa.getFullYear();
+                age.textContent=(JSON.stringify(year-2007+1));
+
+                let nowYear=document.getElementById("ageYear");
+                nowYear.textContent=(year);
+            }
+
+            function anime() {
+                document.getElementById("nav").style.opacity="1";
+                document.getElementById("nav").style.animation="start1 1s ease";
+                document.getElementById("linkbox").style.opacity="0";
+                document.getElementById("contents").style.opacity="0";
+                document.getElementById("animebox").style.opacity="0";
+                setTimeout(function() {
+                    document.getElementById("nav").style.animation="";
+                    document.getElementById("linkbox").style.animation="opac 500ms ease";
+                    document.getElementById("contents").style.animation="start2 1s ease";
+                    document.getElementById("linkbox").style.opacity="1";
+                    document.getElementById("contents").style.opacity="1";
+                },1000);
+                setTimeout(function() {
+                    document.getElementById("linkbox").style.animation="";
+                    document.getElementById("contents").style.animation="";
+                },2000);
+                setTimeout(function() {
+                    document.getElementById("animebox").style.animation="opac 500ms ease";
+                    document.getElementById("animebox").style.opacity="1";
+                },2001);
+                setTimeout(function() {
+                    document.getElementById("animebox").style.animation="";
+                },2500);
+            }
+
+            function settings() {
+                changeAge();
+                window.scrollTo(0, 0);
+                anime();
+            }
+
+            window.onload=function() {
+                settings();
+            }
+        </script>
+        <title>김준이</title>
+    </head>
+    <body>
+        <div id="nav" style="opacity: 0;">
+            <div id="linkbox">
+                <div class="link" name="nav1" id="now" onclick="pageChange(1)">HOME</div>
+                <div class="link" name="nav2" onclick="pageChange(2)">개인정보</div>
+                <div class="link" name="nav3" onclick="pageChange(3)">sns</div>
+                <div class="link" name="nav4" onclick="pageChange(4)">갤러리</div>
+            </div>
+        </div>
+        <div id="page1">
+            <div id="contents" style="opacity: 0;">
+                <div id="animebox">
+                    <div class="imgdis">
+                        <div id="face"></div>
+                        <div id="prodis">
+                            이름: 김준이<br/>나이: <span id="age">14</span>세<br/>성별: 남자<br/>(<span id="ageYear">2020</span>년 기준)
+                        </div>
+                    </div>
+                    <div class="intro">
+                        <br/><br/><br/>안녕하세요!<br/>제 홈페이지에 오신것을 환영합니다!<br/>
+                        제 홈페이지는 저를 소개하고 있습니다.<br/>
+                        홈페이지를 보고 저에 대해 더 잘 알아주시기를 바랍니다! <br/>
+                        좋은 하루 되세요~^^
+                    </div>
+                    <div id="contents-footer"></div>
+                </div>
+            </div>
+        </div>
+        <div id="page2" style="display: none;">
+            <div id="contents">
+                <div class="intro">
+                    <h1>개인정보</h1>
+                    제 이름은 김준이 입니다.<br/>
+                    나이는 <span id="ageYear">2020</span>년을 기준으로 <span id="age">14</span>세이며, 남자입니다.<br/>
+                    장래희망은 프로그래머이고, html, css, js, c, c++등을<br/>
+                    알고 있습니다. 현재 서울 서초동에 거주하며<br/>
+                    아이유를 좋아합니다.
+                </div>
+                <div class="intro">
+                    <h1>프로젝트</h1>
+                    김준이 홈페이지(2020): <a href="http://www.juneekim7.kro.kr">www.juneekim7.kro.kr</a><br/>
+                    김준이 홈페이지(2019): <a href="http://2019.juneekim7.kro.kr">2019.juneekim7.kro.kr</a><br/>
+                    김준이 홈페이지(2018): <a href="http://2018.juneekim7.kro.kr">2018.juneekim7.kro.kr</a><br/>
+                    클라비스 (2020): <a href="http://www.clavis.fun">www.clavis.fun</a><br/>
+                    너소들 (2020): <a href="http://www.mywish.kro.kr">www.mywish.kro.kr</a><br/>
+                    ZB 클랜 홈페이지(2019): <a href="http://www.zbclan.kro.kr">www.ZBCLAN.kro.kr</a><br/>
+                    권총 시물레이션(2019): <a href="http://pistol.jkgun.kro.kr">pistol.jkgun.kro.kr</a><br/>
+                    준이봇(2020): <a href="https://open.kakao.com/me/juneebot7">준이봇 바로가기</a>
+                </div>
+                <div class="intro">
+                    <h1>수상경력 및 영재원</h1>
+                    제 36회 한국정보올림피아드 1차 대회 지역부문 장려상<br/>
+                    제 36회 한국정보올림피아드 1차 대회 전국부문 동상<br/>
+                    제 36회 한국정보올림피아드 2차 대회 장려상<br/>
+                    제 52회 과학의 날 과학기술정보통신부 장관상<br/><br/>
+
+                    2018년 서울교육대학교과학영재원 융합1반<br/>
+                    2019년 서울교육대학교과학영재원 사사 정보<br/>
+                    2020년 한양대영재원 심화반<br/>
+                    2021년 서울대학교 사사 정보과학 영재원<br/>
+                </div>
+                <div id="contents-footer"></div>
+            </div>
+        </div>
+        <div id="page3" style="display: none;">
+            <div id="contents">
+                <div class="imgdis" name="instagram">
+                    <a href="http://insta.juneekim7.kro.kr"><div class="snsimg" style="background-image: url('https://instagram-brand.com/wp-content/uploads/2016/11/Instagram_AppIcon_Aug2017.png?w=600');"></div></a>
+                    <div class="snsdis">
+                        <a href="http://insta.juneekim7.kro.kr">인스타그램</a>은 제가<br/>
+                        가장 잘 이용하는<br/>
+                        sns 입니다.
+                    </div>
+                </div>
+                <div style="height: 5vw;"></div>
+                <div class="imgdis" name="LOL">
+                    <div class="snsdis">
+                        <a href="https://www.op.gg/summoner/userName=%EA%B9%80%EC%A4%80%EC%9D%B4">롤</a> 닉은 김준이 이고,<br/>
+                        아리를 주챔으로<br/>
+                        사용합니다.
+                    </div>
+                    <a href="https://www.op.gg/summoner/userName=%EA%B9%80%EC%A4%80%EC%9D%B4"><div class="snsimg" style="border-radius: 30px; background-image: url('https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/119949409_329441251647125_5616547824439224244_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_cat=105&_nc_ohc=WZGcm0Sf_jUAX9hrJ-R&_nc_tp=15&oh=529d3f0126d5929b10dbe760a3394a9d&oe=5F98F994');"></div></a>
+                </div>
+                <div id="contents-footer"></div>
+            </div>
+        </div>
+        <div id="page4" style="display: none;">
+            <div id="contents">
+                <div id="cs">Comming soon</div>
+            </div>
+        </div>
+    </body>
+</html>

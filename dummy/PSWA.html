@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PSWA-Problem Solving Web Award</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+            body {
+                width: 100vw;
+                background-color: snow;
+                margin: 0;
+                padding: 0;
+                font-family: 'Nanum Gothic', sans-serif;
+                overflow-x: hidden;
+            }
+
+            h1 {
+                font-size: 60px;
+                line-height: 70px;
+            }
+
+            .blank {
+                height: 500px;
+            }
+
+            #header {
+                width: 100vw;
+                height: 60px;
+                background-color: #202020;
+                padding-left: 30px;
+                font-size: 40px;
+                color: white;
+                font-family: sans-serif;
+                position: fixed;
+            }
+
+            #content {
+                width: 70vw;
+                margin: 0 auto;
+                padding-top: 100px;
+                padding-bottom: 100px;
+                text-align: center;
+                font-size: 30px;
+                line-height: 40px;
+                word-break:normal;
+            }
+        </style>
+        <script>
+            function start() {
+                if(window.innerWidth<=window.innerHeight) {
+                    document.getElementById("content").style.width="95vw";
+                }
+            }
+            window.onload= function() {
+                start();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="header">PSWA</div>
+        <div id="content">
+            <h1>PSWA란?</h1>
+            <p>PSWA란 Problem Solving Web Award 의 약자로 세계의 여러 문제들을 어느 웹을 통해 가장 사람들에게 시각적으로 경각심을 가질 수 있는지 선발하는 콘테스트입니다. 카카오톡 ID juneekim7을 통해 제출할 수 있으며 제출 형식은 파일/도메인 입니다. 상금은 콘테스트마다 다르지만 보통 1~5만원 정도입니다. (비공식대회 입니다.)</p>
+            <div class="blank"></div>
+            <h1>제 1회 PSWA</h1>
+            <p>일시: 2020/5/18~5/31<br/><br/>주제: COVID-19<br/><br/>형식: 자유(평가기준에 맞게)<br/><br/>평가기준: 최대점수 50점<br/>웹에 주제가 잘 드러나는가? 1~10점<br/>사람들에게 문제의 심각성을 알려주는가? 1~10점<br/>사람들에게 문제의 해결방안을 알려주는가? 1~10점<br/>많은 기기에서 정상작동 하는가?1~5점<br/>디자인에 독창성이 있는가? 1~5점<br/>디자인이 깔끔하고 이용하기 편한가? 1~5점<br/>사용한 자료가 신뢰성이 있나? 1~5점<br/><br/>상금: 20000원 기프트카드</p>
+        </div>
+    </body>
+</html>

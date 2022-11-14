@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>note</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #write {
+            width: calc(100vw - 20px);
+            height: calc(100vh - 20px);
+            padding: 10px !important;
+            border: none;
+            font-size: 20px;
+            overflow-y: scroll;
+            resize: none;
+        }
+        #write:focus {
+            border: none;
+            outline: none;
+        }
+        #write::-webkit-scrollbar {
+            width: 6px;
+        }
+        #write::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: rgba(90, 90, 90, 0.6);
+        }
+
+        #save {
+            width: 100px;
+            height: 50px;
+            margin: 10px;
+            background-color: mediumseagreen;
+            border-right: 3px solid seagreen;
+            border-bottom: 3px solid seagreen;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+
+            position: fixed;
+            right: 0;
+            bottom: 0;
+        }
+        #save:hover {
+            border: none;
+            border-left: 3px solid seagreen;
+            border-top: 3px solid seagreen;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function save() {
+            localStorage["note"]=document.getElementById("write").value;
+        }
+
+        function start() {
+            if(localStorage["note"]!=undefined) document.getElementById("write").value=localStorage["note"];
+            document.getElementById("write").focus();
+        }
+
+        window.onload=function() {
+            start();
+        }
+    </script>
+</head>
+<body>
+    <textarea id="write" placeholder="노트를 적어주세요"></textarea>
+    <div id="save" onclick="save()">저장</div>
+</body>
+</html>

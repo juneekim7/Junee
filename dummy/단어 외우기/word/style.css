@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    width: 30%;
+    height: 10%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+select {
+    width: 30%;
+    height: 10%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+#box {
+    width: 50%;
+    height: 70%;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    font-size: 2em;
+    text-align: left;
+
+    position: relative;
+    left: 25%; top: 15%;
+}
+
+#basicInfo {
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+#next {
+    width: 10%;
+    height: 6%;
+    position: absolute;
+    left: 85%; top: 85%;
+}

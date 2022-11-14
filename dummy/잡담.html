@@ -1,0 +1,206 @@
+<html>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <head>
+        <title>잡담.</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: rgb(253,253,255);
+                font-family: "Nanum Gothic", sans-serif;
+                overflow: hidden;
+            }
+            input {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+
+            /*input style*/
+            #login {
+                width: 50vw;
+                height: 50px;
+                background-color: #424874;
+                box-sizing: border-box;
+                border: none;
+                border-radius: 25px;
+                font-family: "Nanum Gothic", sans-serif;
+                font-size: 25px;
+                line-height: 50px;
+                text-align: center;
+                color: white;
+                position: relative;
+                top: calc(50vh - 25px); left: 25vw;
+            }
+            #login:active {
+                background-color: #323864;
+                border: 1px solid #1b262c;
+                border-bottom: none;
+            }
+
+            /*nav style*/
+            #navbox {
+                width: 400vw;
+                height: 50px;
+                background-color: #424874;
+                position: fixed;
+                bottom: 0;
+                display: flex;
+            }
+            .nav {
+                width: 25vw;
+                height: 50px;
+                font-size: 15px;
+                text-align: center;
+                color: grey/*rgb(252,252,255)*/;
+                line-height: 50px;
+            }
+
+            /*content style*/
+            #contentbox {
+                width: 500vw;
+                height: calc(100vh - 50px);
+                background-color: rgb(253,253,255);
+                display: flex;
+            }
+            .content {
+                width: 100vw;
+                height: calc(100vh - 50px);
+                background-color: rgb(253,253,255);
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+        </style>
+        <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+        <script>
+            //login
+            function checkLogin() {
+                if(login_id==undefined) {
+                    document.getElementById("navbox").style.display="none";
+                    setTimeout(function() {pageChange(4);},1);
+                }
+                else {
+                    document.getElementById("navbox").style.display="flex";
+                    pageChange(0);
+                }
+            }
+
+            function login_() {
+                document.getElementById("navbox").style.display="flex";
+                document.getElementsByName("id").item(0).value=ip();
+                document.getElementsByName("ban").item(0).value=0;
+                //현재는 login.php로 전송 안됨
+                pageChange(0);
+            }
+
+            //scroll event
+            window.addEventListener("scroll",function(){
+                let scx=document.body.scrollLeft;
+                let scy=document.body.scrollTop;
+
+                //nav 색 변환
+                if(scx<1*window.innerWidth) {
+                    document.getElementById("navpg1").style.color="rgb(253,253,255)";
+                    document.getElementById("navpg2").style.color="grey";
+                    document.getElementById("navpg3").style.color="grey";
+                    document.getElementById("navpg4").style.color="grey";
+                }
+                else if(scx<2*window.innerWidth) {
+                    document.getElementById("navpg1").style.color="grey";
+                    document.getElementById("navpg2").style.color="rgb(253,253,255)";
+                    document.getElementById("navpg3").style.color="grey";
+                    document.getElementById("navpg4").style.color="grey";
+                }
+                else if(scx<3*window.innerWidth) {
+                    document.getElementById("navpg1").style.color="grey";
+                    document.getElementById("navpg2").style.color="grey";
+                    document.getElementById("navpg3").style.color="rgb(253,253,255)";
+                    document.getElementById("navpg4").style.color="grey";
+                }
+                else if(scx<4*window.innerWidth) {
+                    document.getElementById("navpg1").style.color="grey";
+                    document.getElementById("navpg2").style.color="grey";
+                    document.getElementById("navpg3").style.color="grey";
+                    document.getElementById("navpg4").style.color="rgb(253,253,255)";
+                }
+                else {
+                    document.getElementById("navpg1").style.color="grey";
+                    document.getElementById("navpg2").style.color="grey";
+                    document.getElementById("navpg3").style.color="grey";
+                    document.getElementById("navpg4").style.color="grey";
+                }
+            });
+
+            //페이지 이동
+            //*가로 스크롤을 통해 이동
+            function pageChange(x) {
+                document.body.style.position="static";
+                window.scrollTo(x*window.innerWidth,0);
+            }
+
+            //onload 후 실행
+            function checkDivice() {
+                let filter="win16|win32|win64|macintel|mac|";
+                if(filter.indexOf(navigator.platform.toLowerCase())>=0&&ip()!="219.249.92.56") {
+                    alert("핸드폰으로 오세연~");
+                    location.href="http://www.naver.com";
+                }
+            }
+
+            function onloadFunc() {
+                checkDivice();
+                checkLogin();
+            }
+            
+            window.onload=function() {
+                onloadFunc();
+            }
+        </script>
+    </head>
+    <body>
+        <!--콘텐츠-->
+        <div id="contentbox">
+            <div class="content">
+                청정- 욕 및 섹드립 금지
+            </div>
+            <div class="content">
+                불순- 욕 가능, 선 넘지 않는 섹드립 가능
+            </div>
+            <div class="content">
+                후원- 광고보거나 깊카/문상 보내기
+            </div>
+            <div class="content">
+                설정
+            </div>
+            <div class="content">
+                <!--<form name="login" method=POST" action="./php/login.php">-->
+                    <input type="text" name="id" style="width: 0; height: 0; opacity: 0;"/>
+                    <input type="number" name="ban" style="width: 0; height: 0; opacity: 0;"/>
+                    <input type="button" id="login" value="로그인" onclick="login_();"/>
+                <!--</form>-->
+            </div>
+        </div>
+
+        <!--네비게이션 바-->
+        <div id="navbox">
+            <div class="nav" id="navpg1" onclick="pageChange(0);" style="color: rgb(253,253,255);">
+                청정
+            </div>
+            <div class="nav" id="navpg2" onclick="pageChange(1);">
+                불순
+            </div>
+            <div class="nav" id="navpg3" onclick="pageChange(2);">
+                후원
+            </div>
+            <div class="nav" id="navpg4" onclick="pageChange(3);">
+                설정
+            </div>
+        </div>
+
+        <!--api관련 js-->
+    </body>
+</html>

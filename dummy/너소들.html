@@ -1,0 +1,132 @@
+<html>
+    <meta charset="utf-8">
+    <meta name="keyword" content="너의 소원을 들어줄게!">
+    <head>
+        <title>너소들</title>
+        <style>
+            body {
+                margin: 0px;
+                padding: 0px;
+                background-color: ghostwhite;
+                opacity: 1;
+            }
+            #title {
+                font-size: 100px;
+                font-weight: bold;
+                line-height: 120px;
+                text-align: center;
+                position: relative;
+                top: 100px;
+            }
+            #wish {
+                width: 60vw;
+                height: 70px;
+                margin-left: 20vw;
+                outline: none;
+                border: none;
+                border-radius: 20px;
+                box-shadow: 0px 0px 5px 1px grey;
+                box-sizing: border-box;
+                font-size: 50px;
+                text-align: center;
+                ime-mode:active;
+                position: relative;
+                top: 300px;
+                z-index: 1;
+            }
+
+            #wish:focus {
+                outline: none;
+                border: none;
+                box-shadow: 0px 0px 2px 1px goldenrod;
+            }
+
+            #lier {
+                width: 70vw;
+                height: 50vh;
+                background-color: cornsilk;
+                border: 1px solid lightseagreen;
+                border-radius: 20px;
+                box-shadow: 0px 0px 5px 1px grey;
+                box-sizing: border-box;
+                font-size: 100px;
+                text-align: center;
+                opacity: 0;
+                position: fixed;
+                left: 15vw; top: 25vh;
+                animation-duration: 100ms;
+                z-index:0;
+            }
+
+            #close {
+                width: 70vw;
+                height: 100px;
+                background-color: crimson;
+                box-sizing: border-box;
+                border-radius: 0 0 20px 20px;
+                color: white;
+                font-size: 50px;
+                line-height: 30px;
+                text-align: center;
+                position: fixed;
+                left: 15vw; top: calc(75vh - 100px);
+            }
+
+            #close:hover {
+                background-color: darkred;
+            }
+
+            #ad {
+                width: 100vw;
+                height: 50px;
+                background-color: plum;
+                color: white;
+                text-align: center;
+                font-size: 30px;
+                position: fixed;
+                top: calc(100vh - 50px);
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            function lie() {
+                document.getElementById("op").style.opacity=0.1;
+                document.getElementById("lier").style.zIndex=2;
+                document.getElementById("lier").style.opacity=1;
+                document.getElementById("lier").innerHTML="그딴게 가능하겠냐 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ<div id='close' onclick='notclose();''><br/>닫기</div>";
+            }
+
+            function submit() {
+                if(event.keyCode=="13") {
+                    lie();
+                }
+            }
+
+            function notclose() {
+                document.getElementById("lier").innerHTML="안 닫아줄껀뎈ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ<div id='close' onclick='notclose2();''><br/>닫기</div>";
+            }
+
+            function notclose2() {
+                document.getElementById("lier").innerHTML="ㅋㅋㅋㅋ 닫아줄까??<div id='close' onclick='notclose3();''><br/>ㄹㅇㄹㅇ로 닫기</div>";
+            }
+
+            function notclose3() {
+                document.getElementById("op").style.opacity=1;
+                document.getElementById("lier").style.zIndex=0;
+                document.getElementById("lier").style.opacity=0;
+                document.getElementById("lier").innerHTML="";
+                alert("내가 너무 착해서 닫아주는거얌 ><");
+            }
+        </script>
+        <div id="op">
+            <div id="title">너의<br/>소원을<br/>들어줄게!</div>
+            <input id="wish" type="text" placeholder="소원을 적어봐." onkeydown="submit();"/>
+        </div>
+        <div id="lier">
+        </div>
+        <div id="ad">
+            광고 문의: juneekim7@gmail.com
+        </div>
+    </body>
+</html>

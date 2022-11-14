@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <title>⭐크리스마스⭐</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville|Jua|Yeon+Sung&display=swap');
+
+            body {
+                background-color: darkred;
+            }
+
+            div {
+                box-sizing: border-box;
+            }
+
+            #title {
+                margin-top: 5%;
+                font-family: 'Libre Baskerville', serif;
+                text-align: center;
+                color: sandybrown;
+                font-size: 10px;
+                animation-duration: 1s;
+            }
+
+            @keyframes titleA {
+                from{font-size: 10px;}
+                90%{font-size: 110px;}
+                to{font-size: 100px;}
+            }
+
+            #content {
+                margin: 0% 10% 10% 10%;
+                width: 80%;
+                height: 0%;
+                background-color: ivory;
+                border-radius: 30px;
+                animation-duration: 2s;
+            }
+
+            @keyframes contentA {
+                from{height: 0;}
+                50%{height: 40%;}
+                to{height: 80%;}
+            }
+
+            @keyframes contentA2 {
+                from{height: 0;}
+                50%{height: 100%;}
+                to{height: 200%;}
+            }
+
+            #tree {
+                height: 50%;
+                font-family: 'Jua', sans-serif;
+                text-align: center;
+                font-size: 50px;
+            }
+
+            #letter {
+                margin-left: 5%;
+                margin-right: 5%;
+                height: 50%;
+                font-family: 'Yeon Sung', cursive;
+                font-size: 50px;
+                animation-duration: 1s;
+            }
+
+            @keyframes letterA {
+                from{font-size: 0px;}
+                to{font-size: 50px;}
+            }
+
+            #to {text-align: left;}
+
+            #lc {margin: 10% 20% 10% 20%;}
+
+            #from {text-align: right;}
+        </style>
+        <script>
+            var l="와행복한크리스마스보내고정말정말로고마웠어얘들아안녕![준이]";
+            var la=l.split("");
+            var DT=window.matchMedia("screen and (min-width: 1000px)");
+            function tree() {
+                var j=0;
+                var Tenter=[1,3,5,3,5,7,3,4];
+                var c="</br><font size='100px'>⭐</font></br><font color='darkgreen'>";
+                for(var i=0;i<Tenter.length;i++) {
+                    while(Tenter[i]>0) {
+                        c+=la[j];
+                        j++;
+                        Tenter[i]--;
+                    }
+                    if(i==5) c+="</font><font color='darkred'>";
+                    c+="</br>";
+                }
+                c+="</font>"
+                document.getElementById("tree").innerHTML=c;
+            }
+            window.onload=function() {
+                document.getElementById("title").style.animationName="titleA";
+                document.getElementById("title").style.fontSize="100px";
+                setTimeout(function() {
+                    if(DT.matches) {
+                        document.getElementById("content").style.animationName="contentA2";
+                        document.getElementById("content").style.height="200%";
+                    }
+                    else {
+                        document.getElementById("content").style.animationName="contentA";
+                        document.getElementById("content").style.height="80%";
+                    }
+                    setTimeout(function() {
+                        tree();
+                    },1000);
+                    setTimeout(function() {
+                        var letter=document.getElementById("letter");
+                        letter.innerHTML="<div id='to'>친구들에게</div>\
+                        <div id='lc'>\
+                            &nbsp;&nbsp;ㅎ2ㅎ2~</br>\
+                            메리 크리스마스!</br>\
+                            1년동안 모두 고마웠어.</br>\
+                            앞으로도 친하게 지내자.</br>ㅂ2~</br>\
+                        </div>\
+                        <div id='from'>준이가</div>";
+                        letter.style.animationName="letterA";
+                    },2000);
+                },1000);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="title">Merry</br>Christmas</div>
+        <div id="content">
+            <div id="tree"></div>
+            <div id="letter">
+            </div>
+        </div>
+    </body>
+</html>
